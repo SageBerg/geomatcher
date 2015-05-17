@@ -33,11 +33,19 @@ function drag(ev) {
 
 function drop(ev) {
     ev.preventDefault();
-    var data = ev.dataTransfer.getData("text");
-    ev.target.appendChild(document.getElementById(data));
+    if (true) { //TODO figure out what condition I need
+        var data = ev.dataTransfer.getData("text");
+        ev.target.appendChild(document.getElementById(data));
+    } 
+    dropped_images++;
+    if (dropped_images == 2) {
+        document.getElementById("submit").disabled = false;
+    }
+
 }
 
 var score = 0;
+var dropped_images = 0;
 
 function inc_score(ev) {
     score += 1;

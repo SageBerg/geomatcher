@@ -17,7 +17,7 @@
     color: red;
 }
 
-.current_score {
+#current_score {
     display: inline;
     color: red; 
 }
@@ -76,11 +76,30 @@ input {
     font-family: Courier;
 }
 
-#drop_box {
-    background: yellow;
+#matching_box {
+    border-style: solid;
+    border-color: black;
+    border-width: 1px;
     width: 192px;
     height: 108px;
+    float: left;
 }
+
+#drop_box {
+    background: #47ad45;
+    border-style: solid;
+    border-color: black;
+    border-width: 1px;
+    width: 192px;
+    height: 108px;
+    display: inline-block;
+    float: left;
+}
+
+.drag {
+    float: left;
+}
+
 
 
 footer {
