@@ -1,0 +1,46 @@
+<!doctype html>
+<html>
+  <head>
+      <link rel="stylesheet" type="text/css" href="style.css">
+  </head>
+  <body>
+    <p class="app_banner">geomatcher</p>
+    <div class="welcome">Welcome <p class="user_name">Anonymous User</p>! Create a new account or sign in to an existing account to save your score.</div>
+    <div class="welcome">Your Score: <p class="current_score">0</p></div>
+    <div class="game_board"></div>
+    <div class="new_user">
+     <section id="register">
+        <input id="new_name" type="text" placeholder="name">
+        <p>
+        <input id="new_pass" type="text" placeholder="password">
+        <p>
+        <p>
+        <input id="new_pass" type="text" placeholder="enter same password">
+        <p>
+        <button id="register">create new account</button>
+    </section>
+    </div>
+    <div class="new_user">
+    <section id="login">
+        <input id="old_name" type="text" placeholder="name">
+        <p>
+        <input id="old_pass" type="text" placeholder="password">
+        <p>
+        <button id="login">sign in</button>
+    </section>
+    </div>
+    <div class="new_user">
+        top scores of all time
+        <div class="top_score">Erica Johnson +inf</div>
+        <div class="top_score">Sage Berg 9001</div>
+    </div>
+    <!--
+    <section id="result">
+        <h2>Feedback: <span id="feedback"></span></h2>
+    </section>
+    -->
+  <script src="http://code.jquery.com/jquery-latest.min.js"></script>
+  <!-- <script src="http://code.jquery.com/jquery-2.0.3.min.js"></script> -->
+  <script src="app.js"></script>
+  </body>
+</html>

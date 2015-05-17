@@ -1,0 +1,69 @@
+.app_banner {
+    font-size: 400%;
+    text-align: center;
+}
+
+.top_score {
+    padding: 2px;
+    width: 75%;
+    background: #ffffff;
+    border-radius: 10px;
+    margin-top: 5px;
+}
+
+.current_score {
+    display: inline;
+    color: red; 
+}
+
+.welcome {
+    padding: 10px;
+    width: 97%;
+    background: #ffffff;
+    border-radius: 10px;
+    margin: 10px;
+}
+
+.user_name {
+    display: inline;
+    color: red;
+}
+
+.game_board {
+    width: 97%;
+    height: 400px;
+    background: #ffffff;
+    border-style: solid;
+    border-width: 5px;
+    border-color: #ffffff;
+    border-radius: 10px;
+    background: #47ad45;
+    margin: 10px;
+}
+
+.new_user {
+    background: #47ad45;
+    width: 170px;
+    height: 170px;
+    border-radius: 20px;
+    padding: 10px;
+    border-style: solid;
+    border-width: 5px;
+    border-color: #ffffff;
+    margin: 10px;
+    float:left;
+    text-align: center;
+}
+
+body {
+    background: #E0E9CA;
+    font-family: Courier;
+}
+
+button {
+    font-family: Courier;
+}
+
+input {
+    font-family: Courier;
+}
