@@ -1,13 +1,21 @@
 <!doctype html>
 <html>
   <head>
-      <link rel="stylesheet" type="text/css" href="style.css">
+    <title>geomatcher</title>
+    <link rel="stylesheet" type="text/css" href="style.css">
   </head>
   <body>
-    <p class="app_banner">geomatcher</p>
-    <div class="welcome">Welcome <p class="user_name">Anonymous User</p>! Create a new account or sign in to an existing account to save your score.</div>
-    <div class="welcome">Your Score: <p class="current_score">0</p></div>
-    <div class="game_board"></div>
+    <h1 class="app_banner">geomatcher</h1>
+    <div class="game_board" onmousemove="inc_score(event)">
+        <div id="drop_box" ondrop="drop(event)" ondragover="allowDrop(event)">
+        </div>
+        <div id="drop_box" ondrop="drop(event)" ondragover="allowDrop(event)">
+        </div>
+        <img id="drag1" src="usa.png" draggable="true" ondragstart="drag(event)">
+        <button>Submit</button>
+    </div>
+    <div class="welcome">Your Score: <p id="current_score">0</p></div>
+    <div class="welcome" id="user">Hey there <p class="user_name">Anonymous User</p>! Create a new account or sign into an existing account if you want to save your score.</div>
     <div class="new_user">
      <section id="register">
         <input id="new_name" type="text" placeholder="name">
@@ -34,13 +42,12 @@
         <div class="top_score">Erica Johnson +inf</div>
         <div class="top_score">Sage Berg 9001</div>
     </div>
-    <!--
-    <section id="result">
-        <h2>Feedback: <span id="feedback"></span></h2>
-    </section>
-    -->
+  <footer>
+  Designed by 
+  <a class="author_link" href="https://www.linkedin.com/in/ericadjohnson2">Erica Johnson</a> and 
+  <a class="author_link" href="https://www.linkedin.com/in/sageberg">Sage Berg</a> for University of Oregon CIS 399 Web Engineering, Spring 2015.
+  </footer>
   <script src="http://code.jquery.com/jquery-latest.min.js"></script>
-  <!-- <script src="http://code.jquery.com/jquery-2.0.3.min.js"></script> -->
   <script src="app.js"></script>
   </body>
 </html>

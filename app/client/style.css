@@ -1,6 +1,7 @@
 .app_banner {
-    font-size: 400%;
+    font-size: 200%;
     text-align: center;
+    font-weight: normal;
 }
 
 .top_score {
@@ -11,6 +12,11 @@
     margin-top: 5px;
 }
 
+.user_name {
+    display: inline;
+    color: red;
+}
+
 .current_score {
     display: inline;
     color: red; 
@@ -18,19 +24,18 @@
 
 .welcome {
     padding: 10px;
-    width: 97%;
+    width: 96%;
     background: #ffffff;
     border-radius: 10px;
     margin: 10px;
-}
-
-.user_name {
-    display: inline;
-    color: red;
+    border-style: solid;
+    border-width: 5px;
+    border-color: #ffffff;
+    border-radius: 10px;
 }
 
 .game_board {
-    width: 97%;
+    width: 96%;
     height: 400px;
     background: #ffffff;
     border-style: solid;
@@ -39,6 +44,7 @@
     border-radius: 10px;
     background: #47ad45;
     margin: 10px;
+    padding: 10px;
 }
 
 .new_user {
@@ -58,6 +64,8 @@
 body {
     background: #E0E9CA;
     font-family: Courier;
+    margin: 0px;
+    padding: 0px;
 }
 
 button {
@@ -66,4 +74,23 @@ button {
 
 input {
     font-family: Courier;
+}
+
+#drop_box {
+    background: yellow;
+    width: 192px;
+    height: 108px;
+}
+
+
+footer {
+    clear: both;
+    background: #ffffff;
+    padding: 5px;
+    font-size: 75%;
+    font-family: "Times New Roman";
+}
+
+.author_link {
+    display: inline;
 }
