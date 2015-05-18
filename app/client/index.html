@@ -8,12 +8,21 @@
     <h1 class="app_banner">matchinator</h1>
 
     <div class="game_board" id="game_board" onmousemove="inc_score(event)">
-        <img id="matching_box" src="china.jpg">
-        <img id="matching_box" src="usa.png">
-        <div id="drop_box" ondrop="drop(event)" ondragover="allowDrop(event)" style="clear:left;">
+        <div class="matching_frame_wrapper">
+
+        <div class="matching_frame">
+            <img id="matching_box" src="china.jpg">
+            <div id="drop_box" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
         </div>
-        <div id="drop_box" ondrop="drop(event)" ondragover="allowDrop(event)">
+        <div class="matching_frame">
+            <img id="matching_box" src="usa.png">
+            <div id="drop_box" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
         </div>
+        <div class="matching_frame">
+        </div>
+        <div class="matching_frame">
+        </div>
+        </div> <!-- end matching frame wrapper -->
         <img id="drag1" class="drag" src="usa.png" draggable="true" ondragstart="drag(event)"width="192px" height="108px" style="clear: left;">
         <img id="drag2" class="drag" src="china.jpg" draggable="true" ondragstart="drag(event)"width="192px" height="108px">
         <button id="submit" disabled>Submit</button>
@@ -22,6 +31,7 @@
 
     <div class="welcome">Your Score: <p id="current_score">0</p></div>
     <div class="welcome" id="user">Hey there <p id="user_name">Anonymous User</p>! <p id="anon_user_message"> Create a new account or sign into an existing account if you want to save your score.</p></div>
+
     <div class="new_user">
      <section id="register">
         <input id="new_name" type="text" placeholder="name">
@@ -49,6 +59,7 @@
         <div class="top_score">Erica Johnson +inf</div>
         <div class="top_score">Sage Berg 9001</div>
     </div>
+    <div class="matching_frame_wrapper">test</div>
   <footer>
   Designed by 
   <a class="author_link" href="https://www.linkedin.com/in/ericadjohnson2">Erica Johnson</a> and 

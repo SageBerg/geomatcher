@@ -80,31 +80,47 @@ input {
     font-family: Courier;
 }
 
-#matching_box {
+.matching_frame_wrapper {
+    margin: 0 auto;
+    margin: 0 auto;
+    background: white;
+    width: 900px;
+    height: 250px;
+}
+
+.matching_frame {
+    margin: 10px;
+    width: 192px;
+    height: 221px;
+    float: left;
+    border-radius: 5px; 
     border-style: solid;
     border-color: black;
-    border-width: 1px;
+    border-width: 5px;
+}
+
+#matching_box {
     width: 192px;
     height: 108px;
+    border-bottom: solid black 5px;
     float: left;
 }
 
 #drop_box {
     background: #47ad45;
-    border-style: solid;
-    border-color: black;
-    border-width: 1px;
     width: 192px;
     height: 108px;
     display: inline-block;
     float: left;
 }
 
+#starting_drop_box {
+
+}
+
 .drag {
     float: left;
 }
-
-
 
 footer {
     clear: both;

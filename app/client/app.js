@@ -90,4 +90,9 @@ function inc_score(ev) {
     document.getElementById("current_score").innerHTML = score;
 }
 
+//used to see if a picture matches with the picture below it
+function is_correct_match() {
+
+}
+
 $(document).ready(main);
