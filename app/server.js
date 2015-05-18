@@ -42,7 +42,14 @@ app.get("/login.json", loginHandler);
 
 app.post("/register.json", registerHandler);
 
+app.post("/submit.json", submitHandler);
+
 //route handlers - should refactor into separate files
+
+function submitHandler(req, res) {
+    console.log("server got submit request");
+    res.json({});
+}
 
 function loginHandler(req, res) {
     var the_body = req.query; //req.body goes with post
@@ -54,7 +61,8 @@ function loginHandler(req, res) {
         if (!answer.name || !answer.password) {
             res.json(answer); 
         } else {
-            res.json({"url":"./foods.html"});
+            res.json(answer); 
+            //res.json({"url":"./foods.html"});
         }
     });
 }
@@ -102,7 +110,7 @@ function mongoCheckExistence(login, callback) {
         } 
         if (result) {
             if (result.password === password) {
-                callback({"name": true, "password": true});
+                callback({"name": name, "password": true});
             } else {
                 callback({"name": true, "password": false});
             }

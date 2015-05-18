@@ -6,7 +6,8 @@
   </head>
   <body>
     <h1 class="app_banner">geomatcher</h1>
-    <div class="game_board" onmousemove="inc_score(event)">
+
+    <div class="game_board" id="game_board" onmousemove="inc_score(event)">
         <img id="matching_box" src="china.jpg">
         <img id="matching_box" src="usa.png">
         <div id="drop_box" ondrop="drop(event)" ondragover="allowDrop(event)" style="clear:left;">
@@ -16,9 +17,11 @@
         <img id="drag1" class="drag" src="usa.png" draggable="true" ondragstart="drag(event)"width="192px" height="108px" style="clear: left;">
         <img id="drag2" class="drag" src="china.jpg" draggable="true" ondragstart="drag(event)"width="192px" height="108px">
         <button id="submit" disabled>Submit</button>
+        <button id="new_board" disabled>New Board</button>
     </div>
+
     <div class="welcome">Your Score: <p id="current_score">0</p></div>
-    <div class="welcome" id="user">Hey there <p class="user_name">Anonymous User</p>! Create a new account or sign into an existing account if you want to save your score.</div>
+    <div class="welcome" id="user">Hey there <p id="user_name">Anonymous User</p>! <p id="anon_user_message"> Create a new account or sign into an existing account if you want to save your score.</p></div>
     <div class="new_user">
      <section id="register">
         <input id="new_name" type="text" placeholder="name">
@@ -37,7 +40,8 @@
         <p>
         <input id="old_pass" type="text" placeholder="password">
         <p>
-        <button id="login">sign in</button>
+        <button id="login_button">sign in</button>
+        <p id="feedback"></p>
     </section>
     </div>
     <div class="new_user">

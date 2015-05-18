@@ -12,9 +12,13 @@
     margin-top: 5px;
 }
 
-.user_name {
+#user_name {
     display: inline;
     color: red;
+}
+
+#anon_user_message {
+    display: inline; 
 }
 
 #current_score {
