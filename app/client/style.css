@@ -41,7 +41,6 @@
 .game_board {
     width: 96%;
     height: 400px;
-    background: #ffffff;
     border-style: solid;
     border-width: 5px;
     border-color: #ffffff;
@@ -83,20 +82,29 @@ input {
 .matching_frame_wrapper {
     margin: 0 auto;
     margin: 0 auto;
-    background: white;
+    background: #47ad45;
     width: 900px;
-    height: 250px;
+}
+
+#submit {
+    position: absolute;
+    top: 476px;
+    left: 50px;
+}
+
+#new_board {
+    position: absolute;
+    top: 476px;
+    left: 150px;
 }
 
 .matching_frame {
     margin: 10px;
     width: 192px;
-    height: 221px;
+    height: 220px;
     float: left;
     border-radius: 5px; 
-    border-style: solid;
-    border-color: black;
-    border-width: 5px;
+    border: solid black 5px;
 }
 
 #matching_box {
@@ -106,16 +114,28 @@ input {
     float: left;
 }
 
+.question_mark {
+    height: 100%;
+    width: 70%;
+    display: block;
+    margin: auto;
+}
+
 #drop_box {
-    background: #47ad45;
+    background: white;
     width: 192px;
     height: 108px;
     display: inline-block;
     float: left;
 }
 
-#starting_drop_box {
-
+.starting_drop_box {
+    width: 192px;
+    height: 108px;
+    border: solid black 5px;
+    border-radius: 5px;
+    float: left;
+    margin: 10px;
 }
 
 .drag {

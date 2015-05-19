@@ -8,64 +8,106 @@
     <h1 class="app_banner">matchinator</h1>
 
     <div class="game_board" id="game_board" onmousemove="inc_score(event)">
-        <div class="matching_frame_wrapper">
+      <div class="matching_frame_wrapper">
+        <div class="matching_frame">
+          <img id="matching_box" src="china.jpg">
+          <div id="drop_box" ondrop="drop(event)" 
+            ondragover="allowDrop(event)"></div>
+        </div>
+        <div class="matching_frame">
+          <img id="matching_box" src="usa.png">
+          <div id="drop_box" ondrop="drop(event)" 
+            ondragover="allowDrop(event)">
+            <img class="question_mark" src="question_mark.png">
+          </div>
+        </div>
+        <div class="matching_frame">
+          <img id="matching_box" src="usa.png">
+          <div id="drop_box" ondrop="drop(event)" 
+            ondragover="allowDrop(event)">
+            <img class="question_mark" src="question_mark.png">
+          </div>
+        </div>
+        <div class="matching_frame">
+          <img id="matching_box" src="usa.png">
+          <div id="drop_box" ondrop="drop(event)" 
+            ondragover="allowDrop(event)">
+            <img class="question_mark" src="question_mark.png">
+          </div>
+        </div>
+      </div>
 
-        <div class="matching_frame">
-            <img id="matching_box" src="china.jpg">
-            <div id="drop_box" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
+      <div class="matching_frame_wrapper">
+        <div class="starting_drop_box" ondrop="drop(event)" 
+          ondragover="allowDrop(event)">
+          <!-- need to dynamically generate this content -->
+          <img id="drag1" class="drag" src="usa.png" draggable="true" 
+            ondragstart="drag(event)"width="192px" height="108px">
         </div>
-        <div class="matching_frame">
-            <img id="matching_box" src="usa.png">
-            <div id="drop_box" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
+        <div class="starting_drop_box" ondrop="drop(event)" 
+          ondragover="allowDrop(event)">
+          <img id="drag2" class="drag" src="china.jpg" draggable="true" 
+            ondragstart="drag(event)"width="192px" height="108px">
         </div>
-        <div class="matching_frame">
+        <div class="starting_drop_box" ondrop="drop(event)" 
+          ondragover="allowDrop(event)">
+          <img id="drag1" class="drag" src="usa.png" draggable="true" 
+            ondragstart="drag(event)"width="192px" height="108px">
         </div>
-        <div class="matching_frame">
+        <div class="starting_drop_box" ondrop="drop(event)" 
+          ondragover="allowDrop(event)">
+          <img id="drag1" class="drag" src="usa.png" draggable="true" 
+            ondragstart="drag(event)"width="192px" height="108px">
         </div>
-        </div> <!-- end matching frame wrapper -->
-        <img id="drag1" class="drag" src="usa.png" draggable="true" ondragstart="drag(event)"width="192px" height="108px" style="clear: left;">
-        <img id="drag2" class="drag" src="china.jpg" draggable="true" ondragstart="drag(event)"width="192px" height="108px">
-        <button id="submit" disabled>Submit</button>
-        <button id="new_board" disabled>New Board</button>
+      </div>
+
+      <button id="submit" disabled>Submit</button>
+      <button id="new_board" disabled>New Board</button>
+
     </div>
 
     <div class="welcome">Your Score: <p id="current_score">0</p></div>
-    <div class="welcome" id="user">Hey there <p id="user_name">Anonymous User</p>! <p id="anon_user_message"> Create a new account or sign into an existing account if you want to save your score.</p></div>
+    <div class="welcome" id="user">Hey there 
+      <p id="user_name">Anonymous User</p>! 
+      <p id="anon_user_message"> 
+      Create a new account or sign into an existing account if you want to 
+      save your score.</p>
+    </div>
 
     <div class="new_user">
-     <section id="register">
+      <section id="register">
         <input id="new_name" type="text" placeholder="name">
-        <p>
         <input id="new_pass" type="password" placeholder="password">
-        <p>
-        <p>
         <input id="new_pass" type="password" placeholder="enter same password">
-        <p>
         <button id="register">create new account</button>
-    </section>
+      </section>
     </div>
+
     <div class="new_user">
-    <section id="login">
+      <section id="login">
         <input id="old_name" type="text" placeholder="name">
-        <p>
         <input id="old_pass" type="password" placeholder="password">
-        <p>
         <button id="login_button">sign in</button>
         <p id="feedback"></p>
-    </section>
+      </section>
     </div>
+
     <div class="new_user">
-        top scores of all time
-        <div class="top_score">Erica Johnson +inf</div>
-        <div class="top_score">Sage Berg 9001</div>
+      top scores of all time
+      <div class="top_score">Erica Johnson +inf</div>
+      <div class="top_score">Sage Berg 9001</div>
     </div>
-    <div class="matching_frame_wrapper">test</div>
+
   <footer>
-  Designed by 
-  <a class="author_link" href="https://www.linkedin.com/in/ericadjohnson2">Erica Johnson</a> and 
-  <a class="author_link" href="https://www.linkedin.com/in/sageberg">Sage Berg</a> for University of Oregon CIS 399 Web Engineering, Spring 2015.
+    Designed by 
+    <a class="author_link" href="https://www.linkedin.com/in/ericadjohnson2">
+      Erica Johnson</a> and 
+    <a class="author_link" href="https://www.linkedin.com/in/sageberg">
+      Sage Berg</a> for University of Oregon CIS 399 Web Engineering, 
+    Spring 2015.
   </footer>
-  <script src="http://code.jquery.com/jquery-latest.min.js"></script>
-  <script src="app.js"></script>
+
+    <script src="http://code.jquery.com/jquery-latest.min.js"></script>
+    <script src="app.js"></script>
   </body>
 </html>

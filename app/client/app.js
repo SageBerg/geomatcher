@@ -73,7 +73,7 @@ function drag(ev) {
 
 function drop(ev) {
     ev.preventDefault();
-    if (true) { //TODO figure out what condition I need
+    if (true) { //TODO figure out what condition I need>
         var data = ev.dataTransfer.getData("text");
         ev.target.appendChild(document.getElementById(data));
     } 
