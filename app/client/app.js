@@ -1,5 +1,6 @@
 var score = 0;
 var images_dropped = 0;
+var box_occupied = [false, false, false, false, true, true, true, true];
 
 function handleLoginResult(resp_body) {
     console.log(resp_body);
@@ -56,7 +57,6 @@ var main = function (){
         handleSubmitResult);
     });
     $("button#new_board").on("click", function (event) {
-        document.getElementById("game_board").innerHTML = '<img id="matching_box" src="china.jpg"><img id="matching_box" src="usa.png"><div id="drop_box" ondrop="drop(event)" ondragover="allowDrop(event)" style="clear:left;"></div><div id="drop_box" ondrop="drop(event)" ondragover="allowDrop(event)"></div><img id="drag1" class="drag" src="usa.png" draggable="true" ondragstart="drag(event)"width="192px" height="108px" style="clear: left;"><img id="drag2" class="drag" src="china.jpg" draggable="true" ondragstart="drag(event)"width="192px" height="108px"><button id="submit" disabled>Submit</button><button id="new_board" disabled>New Board</button>';
         images_dropped = 0;
         console.log("images dropped in new board: " + images_dropped);
         document.getElementById("submit").disabled = false;
@@ -67,22 +67,43 @@ function allowDrop(ev) {
     ev.preventDefault();
 }
 
+function isInt(n) {
+    return n % 1 === 0;
+}
+
 function drag(ev) {
     ev.dataTransfer.setData("text", ev.target.id);
+    box_occupied[parseInt(ev.target.parentNode.id)] = false;
 }
 
 function drop(ev) {
     ev.preventDefault();
-    if (true) { //TODO figure out what condition I need>
+    if (isInt(ev.target.id) && !box_occupied[parseInt(ev.target.id)]) {
+        box_occupied[parseInt(ev.target.id)] = true;
         var data = ev.dataTransfer.getData("text");
         ev.target.appendChild(document.getElementById(data));
-    } 
+    }
+    //unoccupy();
+    console.log(box_occupied);
     images_dropped++;
     console.log("images dropped: " + images_dropped);
     if (images_dropped == 2) {
         document.getElementById("submit").disabled = false;
     }
 
+}
+
+function unoccupy() {
+    for (var i = 0; i < 8; i++) {
+        //console.log(i + ": " + {"0": document.getElementById(String(i)).innerHTML});
+        //if ($("#" + String(i)).is(":empty")) {
+        //if (document.getElementById(String(i)).innerHTML == null) {
+        console.log(document.getElementById(String(i)).childNodes.length);
+        if (document.getElementById(String(i)).childNodes.length === 1) {
+            console.log("found empty box");
+            box_occupied[i] = false;
+        }
+    }
 }
 
 function inc_score(ev) {

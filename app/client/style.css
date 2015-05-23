@@ -121,7 +121,7 @@ input {
     margin: auto;
 }
 
-#drop_box {
+.drop_box {
     background: white;
     width: 192px;
     height: 108px;
