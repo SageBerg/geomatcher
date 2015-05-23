@@ -63,17 +63,16 @@ var main = function (){
     });
 }
 
-function allowDrop(ev) {
-    ev.preventDefault();
-}
-
 function isInt(n) {
     return n % 1 === 0;
 }
 
+function allowDrop(ev) {
+    ev.preventDefault();
+}
+
 function drag(ev) {
     ev.dataTransfer.setData("text", ev.target.id);
-    box_occupied[parseInt(ev.target.parentNode.id)] = false;
 }
 
 function drop(ev) {
@@ -81,28 +80,13 @@ function drop(ev) {
     if (isInt(ev.target.id) && !box_occupied[parseInt(ev.target.id)]) {
         box_occupied[parseInt(ev.target.id)] = true;
         var data = ev.dataTransfer.getData("text");
+        box_occupied[parseInt(document.getElementById(data).parentNode.id)] = false;
         ev.target.appendChild(document.getElementById(data));
     }
-    //unoccupy();
-    console.log(box_occupied);
     images_dropped++;
     console.log("images dropped: " + images_dropped);
     if (images_dropped == 2) {
         document.getElementById("submit").disabled = false;
-    }
-
-}
-
-function unoccupy() {
-    for (var i = 0; i < 8; i++) {
-        //console.log(i + ": " + {"0": document.getElementById(String(i)).innerHTML});
-        //if ($("#" + String(i)).is(":empty")) {
-        //if (document.getElementById(String(i)).innerHTML == null) {
-        console.log(document.getElementById(String(i)).childNodes.length);
-        if (document.getElementById(String(i)).childNodes.length === 1) {
-            console.log("found empty box");
-            box_occupied[i] = false;
-        }
     }
 }
 
