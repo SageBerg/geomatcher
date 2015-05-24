@@ -1,6 +1,12 @@
 var score = 0;
 var images_dropped = 0;
 var box_occupied = [false, false, false, false, true, true, true, true];
+var countries = {
+                 "china.jpg": ["china.jpg"], 
+                 "usa.png": ["usa.png"],
+                 "turkey.png": ["turkey.png"], 
+                 "indonesia.jpg": ["indonesia.jpg"]
+                }
 
 function handleLoginResult(resp_body) {
     console.log(resp_body);
@@ -33,6 +39,7 @@ function handleSubmitResult(resp_body) {
     document.getElementById("new_board").disabled = false;
     document.getElementById("submit").disabled = true;
     console.log(resp_body);
+    check_matches();
 };
 
 var main = function (){
@@ -92,21 +99,35 @@ function drop(ev) {
         box_occupied[parseInt(document.getElementById(data).parentNode.id)] = false;
         ev.target.appendChild(document.getElementById(data));
     }
-    images_dropped++;
-    console.log("images dropped: " + images_dropped);
-    if (images_dropped == 2) {
+    if (box_occupied[0] && box_occupied[1] && 
+        box_occupied[2] && box_occupied[3]) {
         document.getElementById("submit").disabled = false;
+    } else {
+        document.getElementById("submit").disabled = true;
     }
 }
 
 function inc_score(ev) {
-    score += 1;
-    document.getElementById("current_score").innerHTML = score;
+    //score += 1;
+    //document.getElementById("current_score").innerHTML = score;
 }
 
 //used to see if a picture matches with the picture below it
-function is_correct_match() {
-
+function check_matches() {
+    for (var i = 0; i < 4; i++) {
+        if (document.getElementById(String(i)).childNodes[0].src !== undefined) { 
+            if (document.getElementById("matching_box_" + String(i)).src === 
+                document.getElementById(String(i)).childNodes[0].src) {
+                score += 100;
+            }
+        } else {
+            if (document.getElementById("matching_box_" + String(i)).src === 
+                document.getElementById(String(i)).childNodes[1].src) {
+                score += 100;
+            }
+        }
+    }
+    document.getElementById("current_score").innerHTML = score;
 }
 
 $(document).ready(main);

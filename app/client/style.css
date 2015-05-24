@@ -107,7 +107,7 @@ input {
     border: solid black 5px;
 }
 
-#matching_box {
+.matching_box {
     width: 192px;
     height: 108px;
     border-bottom: solid black 5px;
