@@ -22,13 +22,30 @@ function handleLoginResult(resp_body) {
         document.getElementById("anon_user_message").innerHTML = "";
         document.getElementById("feedback").innerHTML = "";
         document.getElementById("current_score").innerHTML = resp_body.score;
-        /*
-        document.getElementById("login_button").innerHTML = "sign out";
-        document.getElementById("login_button").id = "logout_button";
-        */ 
+        document.getElementById("login").innerHTML = '<button id="logout_button">sign out</button>';
+        $("button#logout_button").on("click", function (event) {
+            handleLogoutResult();
+        });
     } else {
         document.getElementById("feedback").innerHTML = "invalid user name or password";
     }
+};
+
+function handleLogoutResult(resp_body) {
+    score = 0;
+    document.getElementById("current_score").innerHTML = score;
+    document.getElementById("user_name").innerHTML = "Anonymous User";
+    document.getElementById("anon_user_message").innerHTML = "Create a new account or sign into an "
+        + "existing account if you want to save your score.";
+    document.getElementById("login").innerHTML = '<input id="old_name" type="text" ' +
+        'placeholder="name">' + '<input id="old_pass" type="password" placeholder="password">'
+        + '<button id="login_button">sign in</button><p id="feedback"></p>';
+    $("button#login_button").on("click", function (event){ 
+        $.get("login.json",
+            {"name": $("#old_name").val(), "password": $("#old_pass").val(), 
+            "score": parseInt(document.getElementById("current_score").innerHTML) },
+            handleLoginResult);
+    });
 };
 
 function handleRegisterResult(resp_body) {
@@ -37,6 +54,14 @@ function handleRegisterResult(resp_body) {
     if( resp_body.url ) window.location = resp_body.url;
     document.getElementById("user_name").innerHTML = resp_body.name;
     document.getElementById("anon_user_message").innerHTML = "";
+    document.getElementById("new_name").value = '';
+    document.getElementById("new_pass").value = '';
+    document.getElementById("new_pass_2").value = '';
+    
+    document.getElementById("login").innerHTML = '<button id="logout_button">sign out</button>';
+    $("button#logout_button").on("click", function (event) {
+        handleLogoutResult();
+    });
 };
 
 function handleSubmitResult(resp_body) {
@@ -50,19 +75,19 @@ function handleSubmitResult(resp_body) {
 var main = function (){
     new_board();
     $("button#login_button").on("click", function (event){ 
+        if ($("#user_name") !== "Anonymous User") {
+            handleLogoutResult();
+        }
         $.get("login.json",
             {"name": $("#old_name").val(), "password": $("#old_pass").val(), 
             "score": parseInt(document.getElementById("current_score").innerHTML) },
             handleLoginResult);
     });
-    /*
-    $("button#logout_button").on("click", function (event){ 
-    $.get("logout.json",
-        {"name": $("#old_name").val(), "password": $("#old_pass").val() },
-        handleLoginResult);
-    });
-    */
+
     $("button#register").on("click", function (event){ 
+        if ($("#user_name") !== "Anonymous User") {
+            handleLogoutResult();
+        }
         if ($("#new_pass").val() !== $("#new_pass_2").val()) {
             alert("Re-enter the same password. (we can change this from an alert box)");
         } else {
@@ -73,6 +98,7 @@ var main = function (){
                 handleRegisterResult);
         }
     });
+
     $("button#submit").on("click", function (event) {
         check_matches();
         $.post("submit.json", 
@@ -80,6 +106,7 @@ var main = function (){
         "score": parseInt(document.getElementById("current_score").innerHTML)},
         handleSubmitResult);
     });
+
     $("button#new_board").on("click", function (event) {
         new_board();
     });
