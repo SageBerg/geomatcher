@@ -167,9 +167,13 @@ function new_board() {
     document.getElementById("new_board").disabled = true;
     matching_picture_order = shuffle([0, 1, 2, 3]);
     answer_picture_order = shuffle([0, 1, 2, 3]);
+    matching_pictures = [];
+    answers = [];
     for (var i = 0; i < 4; i++) {
+        matching_pictures.push(fetch_random(countries));
+        answers.push(countries[matching_pictures[i]]);
         $("#matching_box_" + i).css("border-bottom", "solid black 5px");
-        $("#matching_box_" + i).innerHTML == "";
+        //$("#matching_box_" + i).innerHTML == "";
         document.getElementById("matching_box_" + String(i)).parentNode.style.border = "solid black 5px";
 
     }
@@ -179,16 +183,22 @@ function new_board() {
         //$("#matching_frame_" + String(i)).innerHTML =
         document.getElementById("matching_frame_" + String(i)).innerHTML =
           '<img class="matching_box" id="matching_box_' + String(i) +
-          '" src=' + fetch_random(countries) + 
+          '" src=' + matching_pictures[matching_picture_order[i]] + 
           '><div class="drop_box" id="' + String(i) + 
           '" ondrop="drop(event)" ondragover="allowDrop(event)"></div>';
+        console.log(document.getElementById(i + 4));
+        document.getElementById(i + 4).innerHTML = 
+          '<img class="drag" ' +
+          'id="drag' + String(i + 4) + 
+          '" src = ' + answers[answer_picture_order[i]] +
+          ' draggable="true"' +
+          ' ondragstart="drag(event)"' +
+          ' width="192px" height="108px">';
         //$("#matching_box_" + String(i)).empty(); 
         //$("#" + String(i)).empty(); 
         //document.getElementById(i).ondragover = "allowDrop(event)";
     }
 
-    //choose picture pairs
-    //add in picture pairs
 }
 
 $(document).ready(main);
