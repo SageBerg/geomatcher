@@ -1,10 +1,16 @@
 var score = 0;
 var box_occupied = [false, false, false, false, true, true, true, true];
-var countries = {
+var xcountries = {
                  "china.jpg": ["china.jpg"], 
                  "usa.png": ["usa.png"],
                  "turkey.png": ["turkey.png"], 
                  "indonesia.jpg": ["indonesia.jpg"]
+                }
+var countries = {
+                 "ch-map.gif": ["ch-lgflag.gif"], 
+                 "us-map.gif": ["us-lgflag.gif"],
+                 "tu-map.gif": ["tu-lgflag.gif"], 
+                 "id-map.gif": ["id-lgflag.gif"]
                 }
 
 function handleLoginResult(resp_body) {
@@ -34,7 +40,6 @@ function handleRegisterResult(resp_body) {
 };
 
 function handleSubmitResult(resp_body) {
-    console.log("sent submit request:");
     document.getElementById("new_board").disabled = false;
     document.getElementById("submit").disabled = true;
     console.log(resp_body);
@@ -121,13 +126,20 @@ function check_matches() {
 }
 
 function game_feedback(i, index) {
-    if (document.getElementById("matching_box_" + String(i)).src === 
-        document.getElementById(i).childNodes[index].src) { 
+    if (maps(document.getElementById("matching_box_" + String(i)).src,
+             document.getElementById(i).childNodes[index].src)) {
         score += 100;
     } else {
         $("#matching_box_" + i).css("border-bottom", "solid red 5px");
         document.getElementById("matching_box_" + i).parentNode.style.border= "solid red 5px";
     }
+}
+
+function maps(key, target) {
+    target = target.split("/")[target.split("/").length - 1];
+    key = key.split("/")[key.split("/").length - 1];
+    console.log("key, target: ", key, target);
+    return $.inArray(target, countries[key]) > -1;
 }
 
 //stackoverflow.com/questions/2450954/how-to-randomize-shuffle-a-javascript-array
@@ -154,7 +166,8 @@ function fetch_random(obj) {
             keys.push(temp_key);
         }
     }
-    return obj[keys[Math.floor(Math.random() * keys.length)]];
+    //return obj[keys[Math.floor(Math.random() * keys.length)]];
+    return keys[Math.floor(Math.random() * keys.length)];
 }
 
 function new_board() {
@@ -187,6 +200,8 @@ function new_board() {
           ' width="192px" height="108px">';
     }
     box_occupied = [false, false, false, false, true, true, true, true];
+    console.log("matching_pictures: " + matching_pictures);
+    console.log("answers: " + answers);
 }
 
 $(document).ready(main);
