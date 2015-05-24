@@ -7,10 +7,10 @@ var xcountries = {
                  "indonesia.jpg": ["indonesia.jpg"]
                 }
 var countries = {
-                 "ch-map.gif": ["ch-lgflag.gif"], 
-                 "us-map.gif": ["us-lgflag.gif"],
-                 "tu-map.gif": ["tu-lgflag.gif"], 
-                 "id-map.gif": ["id-lgflag.gif"]
+                 "ch-map.gif": ["ch-lgflag.gif", "china_title.jpg",], 
+                 "us-map.gif": ["us-lgflag.gif", "united_states_title.jpg",],
+                 "tu-map.gif": ["tu-lgflag.gif", "turkey_title.jpg",], 
+                 "id-map.gif": ["id-lgflag.gif", "indonesia_title.jpg",],
                 }
 
 function handleLoginResult(resp_body) {
@@ -170,6 +170,10 @@ function fetch_random(obj) {
     return keys[Math.floor(Math.random() * keys.length)];
 }
 
+function randint(n) {
+    return Math.floor(Math.random() * n);
+}
+
 function new_board() {
     document.getElementById("submit").disabled = true;
     document.getElementById("new_board").disabled = true;
@@ -179,9 +183,11 @@ function new_board() {
     var answers = [];
     for (var i = 0; i < 4; i++) {
         matching_pictures.push(fetch_random(countries));
-        answers.push(countries[matching_pictures[i]]);
+        picture_roll = randint(countries[matching_pictures[i]].length);
+        answers.push(countries[matching_pictures[i]][picture_roll]);
         $("#matching_box_" + i).css("border-bottom", "solid black 5px");
-        document.getElementById("matching_box_" + String(i)).parentNode.style.border = "solid black 5px";
+        document.getElementById("matching_box_" + 
+            String(i)).parentNode.style.border = "solid black 5px";
 
     }
     $(".matching_frame").empty();
