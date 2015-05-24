@@ -37,6 +37,7 @@ function handleSubmitResult(resp_body) {
     document.getElementById("new_board").disabled = false;
     document.getElementById("submit").disabled = true;
     console.log(resp_body);
+    check_matches();
 };
 
 var main = function (){
@@ -98,13 +99,26 @@ function drop(ev) {
 }
 
 function inc_score(ev) {
-    score += 1;
-    document.getElementById("current_score").innerHTML = score;
+    //score += 1;
+    //document.getElementById("current_score").innerHTML = score;
 }
 
 //used to see if a picture matches with the picture below it
-function is_correct_match() {
-
+function check_matches() {
+    for (var i = 0; i < 4; i++) {
+        if (document.getElementById(String(i)).childNodes[0].src !== undefined) { 
+            if (document.getElementById("matching_box_" + String(i)).src === 
+                document.getElementById(String(i)).childNodes[0].src) {
+                score += 100;
+            }
+        } else {
+            if (document.getElementById("matching_box_" + String(i)).src === 
+                document.getElementById(String(i)).childNodes[1].src) {
+                score += 100;
+            }
+        }
+    }
+    document.getElementById("current_score").innerHTML = score;
 }
 
 $(document).ready(main);
