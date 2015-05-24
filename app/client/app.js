@@ -15,6 +15,7 @@ function handleLoginResult(resp_body) {
         document.getElementById("user_name").innerHTML = resp_body.name;
         document.getElementById("anon_user_message").innerHTML = "";
         document.getElementById("feedback").innerHTML = "";
+        document.getElementById("current_score").innerHTML = resp_body.score;
         /*
         document.getElementById("login_button").innerHTML = "sign out";
         document.getElementById("login_button").id = "logout_button";

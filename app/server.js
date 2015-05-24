@@ -62,6 +62,16 @@ function loginHandler(req, res) {
         if (!answer.name || !answer.password) {
             res.json(answer); 
         } else {
+            console.log("the_body.score: " + the_body.score);
+            console.log("answer.score: " + answer.score);
+            var score = parseInt(the_body.score) + parseInt(answer.score);
+            console.log("answer.name: " + answer.name);
+            User.update({"name": answer.name}, {$set: {"score": score}}, function(err) {
+                if (err) {
+                    console.log("database update error.");
+                }
+            });
+            answer.score = score;
             res.json(answer); 
             //res.json({"url":"./foods.html"});
         }
@@ -116,7 +126,7 @@ function mongoCheckExistence(login, callback) {
         } 
         if (result) {
             if (result.password === password) {
-                callback({"name": name, "password": true});
+                callback({"name": name, "password": true, "score": result.score});
             } else {
                 callback({"name": true, "password": false});
             }
