@@ -1,6 +1,12 @@
 var score = 0;
 var images_dropped = 0;
 var box_occupied = [false, false, false, false, true, true, true, true];
+var countries = {
+                 "china.jpg": ["china.jpg"], 
+                 "usa.png": ["usa.png"],
+                 "turkey.png": ["turkey.png"], 
+                 "indonesia.jpg": ["indonesia.jpg"]
+                }
 
 function handleLoginResult(resp_body) {
     console.log(resp_body);
@@ -83,10 +89,11 @@ function drop(ev) {
         box_occupied[parseInt(document.getElementById(data).parentNode.id)] = false;
         ev.target.appendChild(document.getElementById(data));
     }
-    images_dropped++;
-    console.log("images dropped: " + images_dropped);
-    if (images_dropped == 2) {
+    if (box_occupied[0] && box_occupied[1] && 
+        box_occupied[2] && box_occupied[3]) {
         document.getElementById("submit").disabled = false;
+    } else {
+        document.getElementById("submit").disabled = true;
     }
 }
 
