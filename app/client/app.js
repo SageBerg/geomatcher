@@ -20,8 +20,10 @@ function handleLoginResult(resp_body) {
 
 function handleRegisterResult(resp_body) {
     console.log( resp_body );
-    $("#feedback").text( JSON.stringify( resp_body) )
+    // $("#feedback").text( JSON.stringify( resp_body) )
     if( resp_body.url ) window.location = resp_body.url;
+    document.getElementById("user_name").innerHTML = resp_body.name;
+    document.getElementById("anon_user_message").innerHTML = "";
 };
 
 function handleSubmitResult(resp_body) {
@@ -35,9 +37,10 @@ function handleSubmitResult(resp_body) {
 
 var main = function (){
     $("button#login_button").on("click", function (event){ 
-    $.get("login.json",
-        {"name": $("#old_name").val(), "password": $("#old_pass").val() },
-        handleLoginResult);
+        $.get("login.json",
+            {"name": $("#old_name").val(), "password": $("#old_pass").val(), 
+            "score": parseInt(document.getElementById("current_score").innerHTML) },
+            handleLoginResult);
     });
     /*
     $("button#logout_button").on("click", function (event){ 
@@ -47,12 +50,18 @@ var main = function (){
     });
     */
     $("button#register").on("click", function (event){ 
-    $.post("register.json", 
-        {"name": $("#new_name").val(), "password": $("#new_pass").val() }, 
-        handleRegisterResult);
+        if ($("#new_pass").val() !== $("#new_pass_2").val()) {
+            alert("Re-enter the same password. (we can change this from an alert box)");
+        } else {
+            $.post("register.json", 
+                {"name": $("#new_name").val(), 
+                "password": $("#new_pass").val(), 
+                "score": parseInt(document.getElementById("current_score").innerHTML) }, 
+                handleRegisterResult);
+        }
     });
     $("button#submit").on("click", function (event) {
-    $.post("submit.json", 
+        $.post("submit.json", 
         {},
         handleSubmitResult);
     });

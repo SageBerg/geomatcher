@@ -9,7 +9,7 @@ app = express();
 var server = http.createServer(app);
 server.listen(port); //3000 for now
 
-mongoose.connect('mongodb://localhost/week7login');
+mongoose.connect('mongodb://localhost/geomatcher');
 
 mongoose.connection.on('connected', function () {
      console.log('Mongoose connected');
@@ -31,8 +31,9 @@ app.use(express.static(__dirname + "/client"));
 //schemas (see http://mongoosejs.com/docs/3.6.x/docs/schematypes.html)
 var UserSchema = mongoose.Schema({ user: String,
                                    password: String,
-                                   history: [String],
-                                   compromised: [String]});
+                                   score: Number});
+                                   // history: [String],
+                                   // compromised: [String]});
 
 var User = mongoose.model("User", UserSchema);
 
@@ -71,14 +72,19 @@ function registerHandler(req, res) {
     var the_body = req.body;
     console.log("register request", the_body);
     middleLogin(the_body, function(answer) {
-        if (!answer.name) {
-            new_user = new User({"user": the_body.name, "password": the_body.password});
+        if (the_body.name === '' || the_body.password === '') {
+            console.log('Enter a username and password.');
+            res.json(answer);
+        } else if (!answer.name) {
+            new_user = new User({"user": the_body.name, 
+                                 "password": the_body.password, 
+                                 "score": the_body.score});
             new_user.save(function(err, data) {
                 if (err != null) {
                     console.log("save error: ", err);
                 } else {
                     console.log("entered new user in database");
-                    res.json({"url": "./foods.html"});
+                    res.json(the_body);
                 }
             });
         } else {
