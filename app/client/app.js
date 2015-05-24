@@ -40,14 +40,11 @@ function handleSubmitResult(resp_body) {
     console.log(resp_body);
     document.getElementById("current_score").innerHTML = resp_body.score;
     check_matches();
-    for (var i = 4; i < 8; i++) {
-        document.getElementById(i).ondragover = "";
-    }
-    //lock images, so you can't move them around to get full points
-    //maybe do this by making the startring drop boxes undroppable until the next round
+    box_occupied = [true, true, true, true, true, true, true, true];
 };
 
 var main = function (){
+    new_board();
     $("button#login_button").on("click", function (event){ 
         $.get("login.json",
             {"name": $("#old_name").val(), "password": $("#old_pass").val(), 
@@ -105,7 +102,7 @@ function drop(ev) {
         ev.target.appendChild(document.getElementById(data));
     }
     if (box_occupied[0] && box_occupied[1] && 
-        box_occupied[2] && box_occupied[3]) {
+        box_occupied[2] && box_occupied[3] && !box_occupied[4]) {
         document.getElementById("submit").disabled = false;
     } else {
         document.getElementById("submit").disabled = true;
