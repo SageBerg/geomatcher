@@ -107,27 +107,10 @@ input {
     border: solid black 5px;
 }
 
-.wrong_matching_frame {
-    margin: 10px;
-    width: 192px;
-    height: 220px;
-    float: left;
-    border-radius: 5px; 
-    border: solid red 5px;
-}
-
-
 .matching_box {
     width: 192px;
     height: 108px;
     border-bottom: solid black 5px;
-    float: left;
-}
-
-.wrong_box {
-    width: 192px;
-    height: 108px;
-    border-bottom: solid red 5px;
     float: left;
 }
 

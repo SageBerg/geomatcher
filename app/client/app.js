@@ -1,5 +1,4 @@
 var score = 0;
-var images_dropped = 0;
 var box_occupied = [false, false, false, false, true, true, true, true];
 var countries = {
                  "china.jpg": ["china.jpg"], 
@@ -34,12 +33,13 @@ function handleRegisterResult(resp_body) {
 
 function handleSubmitResult(resp_body) {
     console.log("sent submit request:");
-    //highlight correct and incorrect answers
     //increase score
     document.getElementById("new_board").disabled = false;
     document.getElementById("submit").disabled = true;
     console.log(resp_body);
     check_matches();
+    //lock images, so you can't move them around to get full points
+    //maybe do this by making the startring drop boxes undroppable until the next round
 };
 
 var main = function (){
@@ -73,9 +73,7 @@ var main = function (){
         handleSubmitResult);
     });
     $("button#new_board").on("click", function (event) {
-        images_dropped = 0;
-        console.log("images dropped in new board: " + images_dropped);
-        document.getElementById("submit").disabled = false;
+        new_board();
     });
 }
 
@@ -129,9 +127,43 @@ function game_feedback(i, index) {
         document.getElementById(String(i)).childNodes[index].src) { 
         score += 100;
     } else {
+        $("#matching_box_" + String(i)).css("border-bottom", "solid red 5px");
+        //$("#matching_box_" + String(i)).parentNode.css("border", "solid red 5px");
+        /*
         document.getElementById("matching_box_" + String(i)).className = "wrong_box";
-        document.getElementById("matching_box_" + String(i)).parentNode.className = "wrong_matching_frame";
+        */
+        document.getElementById("matching_box_" + String(i)).parentNode.style.border= "solid red 5px";
     }
+}
+
+//http://stackoverflow.com/questions/2450954/how-to-randomize-shuffle-a-javascript-array
+function shuffle(array) {
+    var currentIndex = array.length, temporaryValue, randomIndex ;
+    // While there remain elements to shuffle...
+    while (0 !== currentIndex) {
+        // Pick a remaining element...
+        randomIndex = Math.floor(Math.random() * currentIndex);
+        currentIndex -= 1;
+        // And swap it with the current element.
+        temporaryValue = array[currentIndex];
+        array[currentIndex] = array[randomIndex];
+        array[randomIndex] = temporaryValue;
+    }
+    return array;
+}
+
+function new_board() {
+    document.getElementById("submit").disabled = true;
+    document.getElementById("new_board").disabled = true;
+    matching_picture_order = shuffle([0, 1, 2, 3]);
+    answer_picture_order = shuffle([0, 1, 2, 3]);
+    for (var i = 0; i < 4; i++) {
+        $("#matching_box_" + String(i)).css("border-bottom", "solid black 5px");
+        document.getElementById("matching_box_" + String(i)).parentNode.style.border = "solid black 5px";
+    }
+    //remove pictures
+    //choose picture pairs
+    //add in picture pairs
 }
 
 $(document).ready(main);
