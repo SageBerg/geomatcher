@@ -79,6 +79,7 @@ var main = function (){
     });
 }
 
+//credit stackoverflow
 function isInt(n) {
     return n % 1 === 0;
 }
@@ -112,22 +113,25 @@ function inc_score(ev) {
     //document.getElementById("current_score").innerHTML = score;
 }
 
-//used to see if a picture matches with the picture below it
 function check_matches() {
     for (var i = 0; i < 4; i++) {
-        if (document.getElementById(String(i)).childNodes[0].src !== undefined) { 
-            if (document.getElementById("matching_box_" + String(i)).src === 
-                document.getElementById(String(i)).childNodes[0].src) {
-                score += 100;
-            }
+        if (document.getElementById(String(i)).childNodes[0].src!==undefined) {
+            game_feedback(i, 0);
         } else {
-            if (document.getElementById("matching_box_" + String(i)).src === 
-                document.getElementById(String(i)).childNodes[1].src) {
-                score += 100;
-            }
+            game_feedback(i, 1);
         }
     }
     document.getElementById("current_score").innerHTML = score;
+}
+
+function game_feedback(i, index) {
+    if (document.getElementById("matching_box_" + String(i)).src === 
+        document.getElementById(String(i)).childNodes[index].src) { 
+        score += 100;
+    } else {
+        document.getElementById("matching_box_" + String(i)).className = "wrong_box";
+        document.getElementById("matching_box_" + String(i)).parentNode.className = "wrong_matching_frame";
+    }
 }
 
 $(document).ready(main);
