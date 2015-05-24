@@ -33,11 +33,13 @@ function handleRegisterResult(resp_body) {
 
 function handleSubmitResult(resp_body) {
     console.log("sent submit request:");
-    //increase score
     document.getElementById("new_board").disabled = false;
     document.getElementById("submit").disabled = true;
     console.log(resp_body);
     check_matches();
+    for (var i = 4; i < 8; i++) {
+        document.getElementById(i).ondragover = "";
+    }
     //lock images, so you can't move them around to get full points
     //maybe do this by making the startring drop boxes undroppable until the next round
 };
@@ -113,7 +115,7 @@ function inc_score(ev) {
 
 function check_matches() {
     for (var i = 0; i < 4; i++) {
-        if (document.getElementById(String(i)).childNodes[0].src!==undefined) {
+        if (document.getElementById(i).childNodes[0].src !== undefined) {
             game_feedback(i, 0);
         } else {
             game_feedback(i, 1);
@@ -124,19 +126,15 @@ function check_matches() {
 
 function game_feedback(i, index) {
     if (document.getElementById("matching_box_" + String(i)).src === 
-        document.getElementById(String(i)).childNodes[index].src) { 
+        document.getElementById(i).childNodes[index].src) { 
         score += 100;
     } else {
-        $("#matching_box_" + String(i)).css("border-bottom", "solid red 5px");
-        //$("#matching_box_" + String(i)).parentNode.css("border", "solid red 5px");
-        /*
-        document.getElementById("matching_box_" + String(i)).className = "wrong_box";
-        */
-        document.getElementById("matching_box_" + String(i)).parentNode.style.border= "solid red 5px";
+        $("#matching_box_" + i).css("border-bottom", "solid red 5px");
+        document.getElementById("matching_box_" + i).parentNode.style.border= "solid red 5px";
     }
 }
 
-//http://stackoverflow.com/questions/2450954/how-to-randomize-shuffle-a-javascript-array
+//stackoverflow.com/questions/2450954/how-to-randomize-shuffle-a-javascript-array
 function shuffle(array) {
     var currentIndex = array.length, temporaryValue, randomIndex ;
     // While there remain elements to shuffle...
@@ -152,16 +150,42 @@ function shuffle(array) {
     return array;
 }
 
+//stackoverflow.com/questions/4428013/how-can-i-choose-an-object-key-at-random
+function fetch_random(obj) {
+    var temp_key, keys = [];
+    for(temp_key in obj) {
+        if(obj.hasOwnProperty(temp_key)) {
+            keys.push(temp_key);
+        }
+    }
+    return obj[keys[Math.floor(Math.random() * keys.length)]];
+}
+
 function new_board() {
     document.getElementById("submit").disabled = true;
     document.getElementById("new_board").disabled = true;
     matching_picture_order = shuffle([0, 1, 2, 3]);
     answer_picture_order = shuffle([0, 1, 2, 3]);
     for (var i = 0; i < 4; i++) {
-        $("#matching_box_" + String(i)).css("border-bottom", "solid black 5px");
+        $("#matching_box_" + i).css("border-bottom", "solid black 5px");
+        $("#matching_box_" + i).innerHTML == "";
         document.getElementById("matching_box_" + String(i)).parentNode.style.border = "solid black 5px";
+
     }
-    //remove pictures
+    $(".matching_frame").empty();
+
+    for (var i = 0; i < 4; i++) {
+        //$("#matching_frame_" + String(i)).innerHTML =
+        document.getElementById("matching_frame_" + String(i)).innerHTML =
+          '<img class="matching_box" id="matching_box_' + String(i) +
+          '" src=' + fetch_random(countries) + 
+          '><div class="drop_box" id="' + String(i) + 
+          '" ondrop="drop(event)" ondragover="allowDrop(event)"></div>';
+        //$("#matching_box_" + String(i)).empty(); 
+        //$("#" + String(i)).empty(); 
+        //document.getElementById(i).ondragover = "allowDrop(event)";
+    }
+
     //choose picture pairs
     //add in picture pairs
 }
