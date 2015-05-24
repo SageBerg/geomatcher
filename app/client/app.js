@@ -9,6 +9,7 @@ var countries = {
 
 function handleLoginResult(resp_body) {
     console.log(resp_body);
+    score = resp_body.score;
 
     if (resp_body.name && resp_body.password) {
         document.getElementById("user_name").innerHTML = resp_body.name;
@@ -37,6 +38,7 @@ function handleSubmitResult(resp_body) {
     document.getElementById("new_board").disabled = false;
     document.getElementById("submit").disabled = true;
     console.log(resp_body);
+    document.getElementById("current_score").innerHTML = resp_body.score;
     check_matches();
     for (var i = 4; i < 8; i++) {
         document.getElementById(i).ondragover = "";
@@ -66,13 +68,14 @@ var main = function (){
             $.post("register.json", 
                 {"name": $("#new_name").val(), 
                 "password": $("#new_pass").val(), 
-                "score": parseInt(document.getElementById("current_score").innerHTML) }, 
+                "score": parseInt(document.getElementById("current_score").innerHTML)}, 
                 handleRegisterResult);
         }
     });
     $("button#submit").on("click", function (event) {
         $.post("submit.json", 
-        {},
+        {"name": document.getElementById("user_name").innerHTML, 
+        "score": parseInt(document.getElementById("current_score").innerHTML)},
         handleSubmitResult);
     });
     $("button#new_board").on("click", function (event) {

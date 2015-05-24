@@ -48,8 +48,28 @@ app.post("/submit.json", submitHandler);
 //route handlers - should refactor into separate files
 
 function submitHandler(req, res) {
-    console.log("server got submit request");
-    res.json({});
+    var the_body = req.body;
+    var score = the_body.score;
+    console.log("SCORE: " + the_body.score);
+    console.log("SUBMIT NAME: " + the_body.name);
+    if (the_body.name !== "Anonymous User") {
+        User.update({"user": the_body.name}, {"score": the_body.score}, function(err) {
+            if (err) {
+                console.log("database update error.");
+            }
+        });
+        User.findOne({"user": the_body.name}, function(err, result) {
+            console.log("existence result ", result); 
+            if (err) {
+                console.log("existence error"); 
+                callback({"err": err});
+                return;
+            } else {
+                score = result.score;
+            }
+        });
+    }
+    res.json({"score": score});
 }
 
 function loginHandler(req, res) {
