@@ -44,7 +44,6 @@ function handleSubmitResult(resp_body) {
     document.getElementById("submit").disabled = true;
     console.log(resp_body);
     document.getElementById("current_score").innerHTML = resp_body.score;
-    check_matches();
     box_occupied = [true, true, true, true, true, true, true, true];
 };
 
@@ -75,6 +74,7 @@ var main = function (){
         }
     });
     $("button#submit").on("click", function (event) {
+        check_matches();
         $.post("submit.json", 
         {"name": document.getElementById("user_name").innerHTML, 
         "score": parseInt(document.getElementById("current_score").innerHTML)},
