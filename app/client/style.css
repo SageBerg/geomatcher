@@ -40,7 +40,7 @@
 
 .game_board {
     width: 96%;
-    height: 400px;
+    height: 484px;
     border-style: solid;
     border-width: 5px;
     border-color: #ffffff;
@@ -88,20 +88,20 @@ input {
 
 #submit {
     position: absolute;
-    top: 476px;
+    top: 560px;
     left: 50px;
 }
 
 #new_board {
     position: absolute;
-    top: 476px;
+    top: 560px;
     left: 150px;
 }
 
 .matching_frame {
     margin: 10px;
     width: 192px;
-    height: 220px;
+    height: 304px;
     float: left;
     border-radius: 5px; 
     border: solid black 5px;
@@ -109,7 +109,7 @@ input {
 
 .matching_box {
     width: 192px;
-    height: 108px;
+    height: 192px;
     border-bottom: solid black 5px;
     float: left;
 }

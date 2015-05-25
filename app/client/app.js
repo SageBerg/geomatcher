@@ -1,29 +1,23 @@
 var score = 0;
 var box_occupied = [false, false, false, false, true, true, true, true];
-var xcountries = {
-                 "ch-map.gif": ["ch-lgflag.gif", "china_title.jpg",], 
-                 "us-map.gif": ["us-lgflag.gif", "united_states_title.jpg",],
-                 "tu-map.gif": ["tu-lgflag.gif", "turkey_title.jpg",], 
-                 "id-map.gif": ["id-lgflag.gif", "indonesia_title.jpg",],
-                }
 var countries = {
-                 "images/maps/ch-map.gif": 
+                 "images/maps/china.png": 
                      ["images/flags/ch-lgflag.gif", 
                       "images/titles/china_title.jpg",], 
-                 "images/maps/us-map.gif": 
+                 "images/maps/united_states.png": 
                      ["images/flags/us-lgflag.gif", 
                       "images/titles/united_states_title.jpg",],
-                 "images/maps/tu-map.gif": 
+                 "images/maps/turkey.jpg": 
                      ["images/flags/tu-lgflag.gif", 
                       "images/titles/turkey_title.jpg",], 
-                 "images/maps/id-map.gif": 
+                 "images/maps/indonesia.png": 
                      ["images/flags/id-lgflag.gif", 
                       "images/titles/indonesia_title.jpg",],
-                 "images/maps/af-map.gif": 
+                 "images/maps/afghanistan.png": 
                      ["images/flags/af-lgflag.gif"],
-                 "images/maps/al-map.gif": 
+                 "images/maps/albania.png": 
                      ["images/flags/al-lgflag.gif"],
-                 "images/maps/ag-map.gif": 
+                 "images/maps/algeria.svg": 
                      ["images/flags/ag-lgflag.gif"],
                 }
 
