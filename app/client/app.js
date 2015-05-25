@@ -7,7 +7,7 @@ var countries = {
                  "images/maps/united_states.png": 
                      ["images/flags/us-lgflag.gif", 
                       "images/titles/united_states_title.jpg",],
-                 "images/maps/turkey.jpg": 
+                 "images/maps/turkey.png": 
                      ["images/flags/tu-lgflag.gif", 
                       "images/titles/turkey_title.jpg",], 
                  "images/maps/indonesia.png": 
@@ -19,6 +19,13 @@ var countries = {
                      ["images/flags/al-lgflag.gif"],
                  "images/maps/algeria.svg": 
                      ["images/flags/ag-lgflag.gif"],
+                 "images/maps/canada.png": 
+                     ["images/flags/ca-lgflag.gif"],
+                 "images/maps/angola.png": 
+                     ["images/flags/ao-lgflag.gif"],
+                 "images/maps/united_arab_emirates.png": 
+                     ["images/flags/ae-lgflag.gif",
+                      "images/titles/unite_arab_emirates_title.jpg",],
                 }
 
 function handleLoginResult(resp_body) {
