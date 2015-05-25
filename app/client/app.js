@@ -1,16 +1,30 @@
 var score = 0;
 var box_occupied = [false, false, false, false, true, true, true, true];
 var xcountries = {
-                 "china.jpg": ["china.jpg"], 
-                 "usa.png": ["usa.png"],
-                 "turkey.png": ["turkey.png"], 
-                 "indonesia.jpg": ["indonesia.jpg"]
-                }
-var countries = {
                  "ch-map.gif": ["ch-lgflag.gif", "china_title.jpg",], 
                  "us-map.gif": ["us-lgflag.gif", "united_states_title.jpg",],
                  "tu-map.gif": ["tu-lgflag.gif", "turkey_title.jpg",], 
                  "id-map.gif": ["id-lgflag.gif", "indonesia_title.jpg",],
+                }
+var countries = {
+                 "images/maps/ch-map.gif": 
+                     ["images/flags/ch-lgflag.gif", 
+                      "images/titles/china_title.jpg",], 
+                 "images/maps/us-map.gif": 
+                     ["images/flags/us-lgflag.gif", 
+                      "images/titles/united_states_title.jpg",],
+                 "images/maps/tu-map.gif": 
+                     ["images/flags/tu-lgflag.gif", 
+                      "images/titles/turkey_title.jpg",], 
+                 "images/maps/id-map.gif": 
+                     ["images/flags/id-lgflag.gif", 
+                      "images/titles/indonesia_title.jpg",],
+                 "images/maps/af-map.gif": 
+                     ["images/flags/af-lgflag.gif"],
+                 "images/maps/al-map.gif": 
+                     ["images/flags/al-lgflag.gif"],
+                 "images/maps/ag-map.gif": 
+                     ["images/flags/ag-lgflag.gif"],
                 }
 
 function handleLoginResult(resp_body) {
@@ -162,11 +176,19 @@ function game_feedback(i, index) {
     }
 }
 
+function build_image_path(src) {
+    path_end = "";
+    path_end += src.split("/")[src.split("/").length - 3] + "/";
+    path_end += src.split("/")[src.split("/").length - 2] + "/";
+    path_end += src.split("/")[src.split("/").length - 1];
+    return path_end; 
+}
+
 function maps(key, target) {
-    target = target.split("/")[target.split("/").length - 1];
-    key = key.split("/")[key.split("/").length - 1];
-    console.log("key, target: ", key, target);
-    return $.inArray(target, countries[key]) > -1;
+    target_path_end = build_image_path(target);
+    key_path_end = build_image_path(key);
+    console.log("key, target: ", key_path_end, target_path_end);
+    return $.inArray(target_path_end, countries[key_path_end]) > -1;
 }
 
 //stackoverflow.com/questions/2450954/how-to-randomize-shuffle-a-javascript-array
