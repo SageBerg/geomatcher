@@ -1,5 +1,6 @@
 var score = 0;
 var box_occupied = [false, false, false, false, true, true, true, true];
+countries = flags;
 
 function handleLoginResult(resp_body) {
     console.log(resp_body);
