@@ -1,79 +1,6 @@
 var score = 0;
 var box_occupied = [false, false, false, false, true, true, true, true];
 
-var countries = {
-                 "images/maps/afghanistan.png": 
-                     ["images/flags/af-lgflag.gif",
-                      "images/religions/islam.jpg",
-                      "images/income/2k.jpg",
-                      "images/titles/afghanistan_title.jpg",],
-                 "images/maps/albania.png": 
-                     ["images/flags/al-lgflag.gif",
-                      "images/religions/islam.jpg",
-                      "images/income/10k.jpg",
-                      "images/titles/albania_title.jpg",],
-                 "images/maps/algeria.svg": 
-                     ["images/flags/ag-lgflag.gif",
-                      "images/religions/islam.jpg",
-                      "images/income/15k.jpg",
-                      "images/titles/algeria_title.jpg",],
-                 "images/maps/angola.png": 
-                     ["images/flags/ao-lgflag.gif",
-                      "images/religions/christianity.jpg",
-                      "images/income/8k.jpg",
-                      "images/titles/angola_title.jpg",],
-                 "images/maps/canada.png": 
-                     ["images/flags/ca-lgflag.gif",
-                      "images/religions/christianity.jpg",
-                      "images/income/45k.jpg",
-                      "images/titles/canada_title.jpg",],
-                 "images/maps/china.png": 
-                     ["images/flags/ch-lgflag.gif", 
-                      "images/religions/nonreligious.jpg",
-                      "images/income/15k.jpg",
-                      "images/titles/china_title.jpg",], 
-                 "images/maps/india.png": 
-                     ["images/flags/in-lgflag.gif", 
-                      "images/religions/hinduism.jpg",
-                      "images/income/6k.jpg",
-                      "images/titles/india_title.jpg",], 
-                 "images/maps/indonesia.png": 
-                     ["images/flags/id-lgflag.gif", 
-                      "images/religions/islam.jpg",
-                      "images/income/10k.jpg",
-                      "images/titles/indonesia_title.jpg",],
-                 "images/maps/pakistan.png":
-                     ["images/flags/pk-lgflag.gif", 
-                      "images/religions/islam.jpg",
-                      "images/income/5k.jpg",
-                      "images/titles/pakistan_title.jpg",], 
-                 "images/maps/russia.png":
-                     ["images/flags/rs-lgflag.gif", 
-                      "images/religions/christianity.jpg",
-                      "images/income/25k.jpg",
-                      "images/titles/russia_title.jpg",], 
-                 "images/maps/singapore.png": 
-                     ["images/flags/sn-lgflag.gif",
-                      "images/religions/buddhism.jpg",
-                      "images/income/80k.jpg",
-                      "images/titles/singapore_title.jpg",],
-                 "images/maps/turkey.png": 
-                     ["images/flags/tu-lgflag.gif", 
-                      "images/religions/islam.jpg",
-                      "images/income/20k.jpg",
-                      "images/titles/turkey_title.jpg",], 
-                 "images/maps/united_arab_emirates.jpg": 
-                     ["images/flags/ae-lgflag.gif",
-                      "images/religions/islam.jpg",
-                      "images/income/65k.jpg",
-                      "images/titles/united_arab_emirates_title.jpg",],
-                 "images/maps/united_states.png": 
-                     ["images/flags/us-lgflag.gif", 
-                      "images/income/55k.jpg",
-                      "images/religions/christianity.jpg",
-                      "images/titles/united_states_title.jpg",],
-                }
-
 function handleLoginResult(resp_body) {
     console.log(resp_body);
     score = resp_body.score;
@@ -217,9 +144,9 @@ function game_feedback(i, index) {
     if (maps(document.getElementById("matching_box_" + String(i)).src,
              document.getElementById(i).childNodes[index].src)) {
         score += 100;
+        document.getElementById(i).style.border= "solid lime 5px";
     } else {
-        $("#matching_box_" + i).css("border-bottom", "solid red 5px");
-        document.getElementById("matching_box_" + i).parentNode.style.border= "solid red 5px";
+        document.getElementById(i).style.border= "solid red 5px";
     }
 }
 
@@ -281,10 +208,7 @@ function new_board() {
         matching_pictures.push(fetch_random(countries));
         picture_roll = randint(countries[matching_pictures[i]].length);
         answers.push(countries[matching_pictures[i]][picture_roll]);
-        $("#matching_box_" + i).css("border-bottom", "solid black 5px");
-        document.getElementById("matching_box_" + 
-            String(i)).parentNode.style.border = "solid black 5px";
-
+        $("#" + String(i)).css("border-bottom", "solid black 5px");
     }
     $(".matching_frame").empty();
     for (var i = 0; i < 4; i++) {
