@@ -76,7 +76,7 @@ var countries = {
                      ["images/flags/bosnia_and_herzegovina.gif",
                       "images/religions/christianity.jpg",
                       "images/income/10k.jpg",
-                      "images/population/3m.jpg",
+                      "images/populations/3m.jpg",
                       "images/titles/bosnia_and_herzegovina_title.jpg",],
                  "images/maps/brazil.png": 
                      ["images/flags/brazil.gif",
@@ -97,12 +97,36 @@ var countries = {
                       "images/income/9h.jpg",
                       "images/populations/10m.jpg",
                       "images/titles/burundi_title.jpg",],
-                 "images/maps/canada.png": 
+                 "images/maps/cambodia.png": 
+                     ["images/flags/cambodia.gif",
+                      "images/religions/buddhism.jpg",
+                      "images/income/3k.jpg",
+                      "images/populations/15m.jpg",
+                      "images/titles/cambodia_title.jpg",],
+                 "images/maps/cameroon.png": 
+                     ["images/flags/cameroon.gif",
+                      "images/religions/christianity.jpg",
+                      "images/income/3k.jpg",
+                      "images/populations/20m.jpg",
+                      "images/titles/cameroon_title.jpg",],
+                 "images/maps/canada.png":
                      ["images/flags/canada.gif",
                       "images/religions/christianity.jpg",
                       "images/income/45k.jpg",
                       "images/populations/35m.jpg",
                       "images/titles/canada_title.jpg",],
+                 "images/maps/central_african_republic.png": 
+                     ["images/flags/central_african_republic.gif",
+                      "images/religions/christianity.jpg",
+                      "images/income/600h.jpg",
+                      "images/populations/5m.jpg",
+                      "images/titles/central_african_republic_title.jpg",],
+                 "images/maps/chad.png":
+                     ["images/flags/chad.gif", 
+                      "images/religions/islam.jpg",
+                      "images/income/3k.jpg",
+                      "images/populations/15m.jpg",
+                      "images/titles/chad_title.jpg",], 
                  "images/maps/chile.png":
                      ["images/flags/chile.gif", 
                       "images/religions/christianity.jpg",
@@ -115,12 +139,72 @@ var countries = {
                       "images/income/15k.jpg",
                       "images/populations/china_pop.jpg",
                       "images/titles/china_title.jpg",], 
+                 "images/maps/colombia.png":
+                     ["images/flags/colombia.gif", 
+                      "images/religions/christianity.jpg",
+                      "images/income/15k.jpg",
+                      "images/populations/50m.jpg",
+                      "images/titles/colombia_title.jpg",], 
+                 "images/maps/congo.png":
+                     ["images/flags/republic_of_the_congo.gif", 
+                      "images/religions/christianity.jpg",
+                      "images/income/6k.jpg",
+                      "images/populations/5m.jpg",
+                      "images/titles/republic_of_the_congo_title.jpg",], 
+                 "images/maps/costa_rica.png":
+                     ["images/flags/costa_rica.gif", 
+                      "images/religions/christianity.jpg",
+                      "images/income/15k.jpg",
+                      "images/populations/5m.jpg",
+                      "images/titles/costa_rica_title.jpg",], 
+                 "images/maps/cuba.png":
+                     ["images/flags/cuba.gif", 
+                      "images/religions/christianity.jpg",
+                      "images/income/10k.jpg",
+                      "images/populations/10m.jpg",
+                      "images/titles/cuba_title.jpg",], 
+                 "images/maps/democratic_republic_of_the_congo.png":
+                     ["images/flags/democratic_republic_of_the_congo.gif", 
+                      "images/religions/christianity.jpg",
+                      "images/income/7h.jpg",
+                      "images/populations/70m.jpg",
+                      "images/titles/democratic_republic_of_the_congo_title.jpg",], 
+                 "images/maps/denmark.png":
+                     ["images/flags/denmark.gif", 
+                      "images/religions/christianity.jpg",
+                      "images/income/45k.jpg",
+                      "images/populations/5m.jpg",
+                      "images/titles/denmark_title.jpg",], 
+                 "images/maps/dominican_republic.png":
+                     ["images/flags/dominican_republic.gif", 
+                      "images/religions/christianity.jpg",
+                      "images/income/15k.jpg",
+                      "images/populations/15m.jpg",
+                      "images/titles/dominican_republic_title.jpg",], 
+                 "images/maps/ecuador.png":
+                     ["images/flags/ecuador.gif", 
+                      "images/religions/christianity.jpg",
+                      "images/income/10k.jpg",
+                      "images/populations/15m.jpg",
+                      "images/titles/ecuador_title.jpg",], 
                  "images/maps/egypt.png":
                      ["images/flags/egypt.gif",
                       "images/religions/islam.jpg",
                       "images/income/10k.jpg",
                       "images/populations/90m.jpg",
                       "images/titles/egypt_title.jpg",],
+                 "images/maps/el_salvador.png":
+                     ["images/flags/el_salvador.gif", 
+                      "images/religions/christianity.jpg",
+                      "images/income/8k.jpg",
+                      "images/populations/5m.jpg",
+                      "images/titles/el_salvador_title.jpg",], 
+                 "images/maps/eritrea.png":
+                     ["images/flags/eritrea.gif",
+                      "images/religions/islam.jpg",
+                      "images/income/1k.jpg",
+                      "images/populations/6m.jpg",
+                      "images/titles/eritrea_title.jpg",],
                       /*
                  "images/maps/ethiopia.jpg":
                      ["images/flags/et-lgflag.gif",
@@ -129,6 +213,12 @@ var countries = {
                       "images/populations/90m.jpg",
                       "images/titles/ethiopia_title.jpg",],
                       */
+                 "images/maps/finland.png": 
+                     ["images/flags/finland.gif",
+                      "images/religions/christianity.jpg",
+                      "images/income/40k.jpg",
+                      "images/populations/5m.jpg",
+                      "images/titles/finland_title.jpg",],
                  "images/maps/france.png":
                      ["images/flags/france.gif",
                       "images/religions/christianity.jpg",
@@ -165,19 +255,48 @@ var countries = {
                       "images/income/10k.jpg",
                       "images/populations/indonesia_pop.jpg",
                       "images/titles/indonesia_title.jpg",],
-                 "images/maps/japan.png": 
-                     ["images/flags/japan.gif", 
+                 "images/maps/georgia.png": 
+                     ["images/flags/georgia.gif", 
+                      "images/religions/christianity.jpg",
+                      "images/income/8k.jpg",
+                      "images/populations/4m.jpg",
+                      "images/titles/georgia_title.jpg",],
+                 "images/maps/ghana.png": 
+                     ["images/flags/ghana.gif",
+                      "images/religions/christianity.jpg",
+                      "images/income/4k.jpg",
+                      "images/populations/30m.jpg",
+                      "images/titles/ghana_title.jpg",],
+                 "images/maps/guatemala.png":
+                     ["images/flags/guatemala.gif", 
+                      "images/religions/christianity.jpg",
+                      "images/income/8k.jpg",
+                      "images/populations/15m.jpg",
+                      "images/titles/guatemala_title.jpg",], 
+                 "images/maps/haiti.png":
+                     ["images/flags/haiti.gif", 
+                      "images/religions/christianity.jpg",
+                      "images/income/2k.jpg",
+                      "images/populations/10m.jpg",
+                      "images/titles/haiti_title.jpg",], 
+                 "images/maps/honduras.png":
+                     ["images/flags/honduras.gif", 
+                      "images/religions/christianity.jpg",
+                      "images/income/5k.jpg",
+                      "images/populations/8m.jpg",
+                      "images/titles/honduras_title.jpg",], 
+                 "images/maps/japan.png":
+                     ["images/flags/japan.gif",
                       "images/religions/nonreligious.jpg",
                       "images/income/40k.jpg",
                       "images/populations/japan_pop.jpg",
                       "images/titles/japan_title.jpg",],
-                      /*
-                 "images/maps/mauritania.jpg":
-                     ["images/flags/mr-lgflag.gif", 
+                 "images/maps/mauritania.png":
+                     ["images/flags/mauritania.gif", 
                       "images/religions/islam.jpg",
                       "images/income/4k.jpg",
+                      "images/populations/4m.jpg",
                       "images/titles/mauritania_title.jpg",], 
-                      */
                  "images/maps/mexico.png": 
                      ["images/flags/mexico.gif",
                       "images/religions/christianity.jpg",
