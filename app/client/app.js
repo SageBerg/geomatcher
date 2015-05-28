@@ -71,7 +71,7 @@ function handleSubmitResult(resp_body) {
 var main = function (){
     new_board();
     $("button#login_button").on("click", function (event){ 
-        if ($("#user_name") !== "Anonymous User") {
+        if (document.getElementById("user_name").innerHTML !== "Anonymous User") {
             handleLogoutResult();
         }
         $.get("login.json",
