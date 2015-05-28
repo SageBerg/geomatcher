@@ -1,8 +1,8 @@
 var score = 0;
 var box_occupied = [false, false, false, false, true, true, true, true];
 var quizzes = {"all": -1, "flags": 0, "religions": 1, "incomes": 2, 
-               "names": 3};
-quiz_index = 3;
+               "populations": 3, "names": 4};
+quiz_index = 4;
 quiz_button_ids = ["names_quiz", "flags_quiz", "incomes_quiz", "religions_quiz",
                    "populations_quiz", "all_quiz"];
 
