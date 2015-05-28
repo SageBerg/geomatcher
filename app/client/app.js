@@ -1,6 +1,14 @@
 var score = 0;
 var box_occupied = [false, false, false, false, true, true, true, true];
-countries = flags;
+var quizzes = {"all": -1, "flags": 0, "religions": 1, "incomes": 2, 
+               "names": 3};
+quiz_index = 3;
+quiz_button_ids = ["names_quiz", "flags_quiz", "incomes_quiz", "religions_quiz",
+                   "populations_quiz", "all_quiz"];
+
+for (x in quiz_button_ids) {
+    $("#" + quiz_button_ids[x]).css("cursor", "pointer");
+}
 
 function handleLoginResult(resp_body) {
     console.log(resp_body);
@@ -39,7 +47,6 @@ function handleLogoutResult(resp_body) {
 
 function handleRegisterResult(resp_body) {
     console.log( resp_body );
-    // $("#feedback").text( JSON.stringify( resp_body) )
     if( resp_body.url ) window.location = resp_body.url;
     document.getElementById("user_name").innerHTML = resp_body.name;
     document.getElementById("anon_user_message").innerHTML = "";
@@ -207,7 +214,11 @@ function new_board() {
     var answers = [];
     for (var i = 0; i < 4; i++) {
         matching_pictures.push(fetch_random(countries));
-        picture_roll = randint(countries[matching_pictures[i]].length);
+        if (quiz_index === -1) {
+            picture_roll = randint(countries[matching_pictures[i]].length);
+        } else {
+            picture_roll = quiz_index;
+        }
         answers.push(countries[matching_pictures[i]][picture_roll]);
         $("#" + String(i)).css("border-bottom", "solid black 5px");
     }
@@ -227,6 +238,17 @@ function new_board() {
           ' width="192px" height="108px">';
     }
     box_occupied = [false, false, false, false, true, true, true, true];
+}
+
+function change_quiz(quiz_type, quiz_button_id) {
+    quiz_index = quizzes[quiz_type];
+    new_board();
+    for (x in quiz_button_ids) {
+        if (quiz_button_ids[x] !== quiz_button_id) {
+            $("#" + quiz_button_ids[x]).css("background", "#C6DEBD");
+        }
+    }
+    $("#" + quiz_button_id).css("background", "#627A59");
 }
 
 $(document).ready(main);

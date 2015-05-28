@@ -8,12 +8,31 @@
     <h1 class="app_banner">matchinator</h1>
 
     <div class="tab_wrapper">
-      <div class="tab" style="margin-left:10px; background:#627A59;">names</div>
-      <div class="tab">flags</div>
-      <div class="tab">incomes</div>
-      <div class="tab">religions</div>
-      <div class="tab">populations</div>
-      <div class="tab">all</div>
+      <div class="tab" id="names_quiz" 
+        onclick="change_quiz('names', 'names_quiz')" 
+        style="margin-left:10px; background:#627A59;">
+        names
+      </div>
+      <div class="tab" id="flags_quiz" 
+        onclick="change_quiz('flags', 'flags_quiz')">
+        flags
+      </div>
+      <div class="tab" id="incomes_quiz"
+        onclick="change_quiz('incomes', 'incomes_quiz')">
+        incomes
+      </div>
+      <div class="tab" id="religions_quiz"
+        onclick="change_quiz('religions', 'religions_quiz')">
+        religions
+      </div>
+      <div class="tab" id="populations_quiz"
+        onclick="change_quiz('flags', 'populations_quiz')">
+        populations
+      </div>
+      <div class="tab" id="all_quiz"
+        onclick="change_quiz('all', 'all_quiz')">
+        all
+      </div>
     </div>
 
     <div class="game_board" id="game_board">
@@ -104,10 +123,8 @@
       Sage Berg</a> for University of Oregon CIS 399 Web Engineering, 
     Spring 2015.
   </footer>
-    <!-- <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script> -->
     <script src="http://code.jquery.com/jquery-latest.min.js"></script>
     <script src="countries.js"></script>
-    <script src="flags.js"></script>
     <script src="app.js"></script>
   </body>
 </html>

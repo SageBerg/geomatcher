@@ -39,7 +39,7 @@ input {
 }
 
 .tab:hover {
-    background: #94AC81; 
+    background: #94AC81!important; 
 }
 
 .game_board {
