@@ -221,7 +221,7 @@ function randint(n) {
 function new_board() {
     start_time = new Date();
     submit_disabled = true;
-    disable("sumbit");
+    disable("submit");
     new_board_disabled = true;
     disable("new_board");
     var matching_picture_order = shuffle([0, 1, 2, 3]);
