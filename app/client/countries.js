@@ -403,6 +403,12 @@ var countries = {
                       "images/income/4k.jpg",
                       "images/populations/4m.jpg",
                       "images/titles/mauritania_title.jpg",], 
+                 "images/maps/mauritius.png":
+                     ["images/flags/mauritius.gif", 
+                      "images/religions/hinduism.jpg",
+                      "images/income/20k.jpg",
+                      "images/populations/1m.jpg",
+                      "images/titles/mauritius_title.jpg",], 
                  "images/maps/malaysia.png":
                      ["images/flags/malaysia.gif", 
                       "images/religions/islam.jpg",
@@ -680,6 +686,12 @@ var countries = {
                       "images/income/15k.jpg",
                       "images/populations/65m.jpg",
                       "images/titles/thailand_title.jpg",], 
+                 "images/maps/trinidad_and_tobago.png": 
+                     ["images/flags/trinidad_and_tobago.gif", 
+                      "images/religions/christianity.jpg",
+                      "images/income/30k.jpg",
+                      "images/populations/1m.jpg",
+                      "images/titles/trinidad_and_tobago_title.jpg",], 
                  "images/maps/gambia.png":
                      ["images/flags/the_gambia.gif", 
                       "images/religions/islam.jpg",
