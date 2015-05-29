@@ -1,23 +1,10 @@
 var score = 0;
-var number_correct = 0;
-
-//assigned timestamps when a new board is generated or submitted
-//measures how fast the learner completes the board 
-//used to award bonus points for faster responses
-var start_time = null;
-var end_time = null;
-
 var box_occupied = [false, false, false, false, true, true, true, true];
 var quizzes = {"all": -1, "flags": 0, "religions": 1, "incomes": 2, 
                "populations": 3, "names": 4};
-
-//quiz values = log base 10 of the number of answer tiles in quiz * 100
-//for example: there are 7 tiles in the religions set, so log(7) * 100 = 84
-var quiz_values = {"-1": 251, "0": 211, "1": 84, "2": 143, "3": 153, "4": 211}; 
-
-var quiz_index = 4;
-var quiz_button_ids = ["names_quiz", "flags_quiz", "incomes_quiz", 
-                       "religions_quiz", "populations_quiz", "all_quiz"];
+quiz_index = 4;
+quiz_button_ids = ["names_quiz", "flags_quiz", "incomes_quiz", "religions_quiz",
+                   "populations_quiz", "all_quiz"];
 
 var submit_disabled = true;
 var new_board_disabled = true;
@@ -31,10 +18,12 @@ $("#new_board").css("cursor", "pointer");
 
 function handleLoginResult(resp_body) {
     score = resp_body.score;
+    clear_register();
+
     if (resp_body.name && resp_body.password) {
         document.getElementById("user_name").innerHTML = resp_body.name;
         document.getElementById("anon_user_message").innerHTML = "";
-        document.getElementById("feedback").innerHTML = "";
+        clear_login();
         document.getElementById("current_score").innerHTML = resp_body.score;
         document.getElementById("login").innerHTML = '<button id="logout_button">sign out</button>';
         $("button#logout_button").on("click", function (event) {
@@ -66,10 +55,8 @@ function handleRegisterResult(resp_body) {
     console.log( resp_body );
     if( resp_body.url ) window.location = resp_body.url;
     document.getElementById("user_name").innerHTML = resp_body.name;
-    document.getElementById("anon_user_message").innerHTML = "";
-    document.getElementById("new_name").value = '';
-    document.getElementById("new_pass").value = '';
-    document.getElementById("new_pass_2").value = '';
+    document.getElementById("anon_user_message").innerHTML = '';
+    clear_register();
     
     document.getElementById("login").innerHTML = '<button id="logout_button">sign out</button>';
     $("button#logout_button").on("click", function (event) {
@@ -103,7 +90,7 @@ var main = function (){
             handleLogoutResult();
         }
         if ($("#new_pass").val() !== $("#new_pass_2").val()) {
-            alert("Re-enter the same password. (we can change this from an alert box)");
+            document.getElementById("register_feedback").innerHTML = "Re-enter the same password.";
         } else {
             $.post("register.json", 
                 {"name": $("#new_name").val(), 
@@ -165,7 +152,6 @@ function drop(ev) {
 }
 
 function check_matches() {
-    number_correct = 0;
     for (var i = 0; i < 4; i++) {
         if (document.getElementById(i).childNodes[0].src !== undefined) {
             game_feedback(i, 0);
@@ -173,19 +159,14 @@ function check_matches() {
             game_feedback(i, 1);
         }
     }
-    speed_bonus = (60 - ((end_time - start_time) / 1000));
-    if (speed_bonus > 0 && number_correct === 4) {
-        score += speed_bonus;
-    }
     document.getElementById("current_score").innerHTML = score;
 }
 
 function game_feedback(i, index) {
     if (maps(document.getElementById("matching_box_" + String(i)).src,
              document.getElementById(i).childNodes[index].src)) {
-        score += quiz_values[String(quiz_index)];
+        score += 100;
         document.getElementById(i).style.border= "solid lime 5px";
-        number_correct += 1;
     } else {
         document.getElementById(i).style.border= "solid red 5px";
     }
@@ -229,6 +210,7 @@ function fetch_random(obj) {
             keys.push(temp_key);
         }
     }
+    //return obj[keys[Math.floor(Math.random() * keys.length)]];
     return keys[Math.floor(Math.random() * keys.length)];
 }
 
@@ -246,14 +228,8 @@ function new_board() {
     var answer_picture_order = shuffle([0, 1, 2, 3]);
     var matching_pictures = [];
     var answers = [];
-    var candidate_country = null;
     for (var i = 0; i < 4; i++) {
-        candidate_country = (fetch_random(countries)); 
-        if ($.inArray(candidate_country, matching_pictures) > -1) {
-            i--;
-            continue;
-        };
-        matching_pictures.push(candidate_country);
+        matching_pictures.push(fetch_random(countries));
         if (quiz_index === -1) {
             picture_roll = randint(countries[matching_pictures[i]].length);
         } else {
@@ -297,6 +273,19 @@ function enable(id) {
 
 function disable(id) {
     $("#" + id).css("color", "#A0A0A0");
+}
+
+function clear_register() {
+    document.getElementById("new_name").value = '';
+    document.getElementById("new_pass").value = '';
+    document.getElementById("new_pass_2").value = '';
+    document.getElementById("register_feedback").innerHTML = '';
+}
+
+function clear_login() {
+    document.getElementById("old_name").value = '';
+    document.getElementById("old_pass").value = '';
+    document.getElementById("feedback").innerHTML = '';
 }
 
 $(document).ready(main);
