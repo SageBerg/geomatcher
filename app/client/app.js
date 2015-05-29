@@ -1,10 +1,23 @@
 var score = 0;
+var number_correct = 0;
+
+//assigned timestamps when a new board is generated or submitted
+//measures how fast the learner completes the board 
+//used to award bonus points for faster responses
+var start_time = null;
+var end_time = null;
+
 var box_occupied = [false, false, false, false, true, true, true, true];
 var quizzes = {"all": -1, "flags": 0, "religions": 1, "incomes": 2, 
                "populations": 3, "names": 4};
-quiz_index = 4;
-quiz_button_ids = ["names_quiz", "flags_quiz", "incomes_quiz", "religions_quiz",
-                   "populations_quiz", "all_quiz"];
+
+//quiz values = log base 10 of the number of answer tiles in quiz * 100
+//for example: there are 7 tiles in the religions set, so log(7) * 100 = 84
+var quiz_values = {"-1": 251, "0": 211, "1": 84, "2": 143, "3": 153, "4": 211}; 
+
+var quiz_index = 4;
+var quiz_button_ids = ["names_quiz", "flags_quiz", "incomes_quiz", 
+                       "religions_quiz", "populations_quiz", "all_quiz"];
 
 for (x in quiz_button_ids) {
     $("#" + quiz_button_ids[x]).css("cursor", "pointer");
@@ -63,7 +76,6 @@ function handleRegisterResult(resp_body) {
 function handleSubmitResult(resp_body) {
     document.getElementById("new_board").disabled = false;
     document.getElementById("submit").disabled = true;
-    console.log(resp_body);
     document.getElementById("current_score").innerHTML = resp_body.score;
     box_occupied = [true, true, true, true, true, true, true, true];
 };
@@ -96,6 +108,7 @@ var main = function (){
     });
 
     $("button#submit").on("click", function (event) {
+        end_time = new Date();
         check_matches();
         $.post("submit.json", 
         {"name": document.getElementById("user_name").innerHTML, 
@@ -138,6 +151,7 @@ function drop(ev) {
 }
 
 function check_matches() {
+    number_correct = 0;
     for (var i = 0; i < 4; i++) {
         if (document.getElementById(i).childNodes[0].src !== undefined) {
             game_feedback(i, 0);
@@ -145,14 +159,19 @@ function check_matches() {
             game_feedback(i, 1);
         }
     }
+    speed_bonus = (60 - ((end_time - start_time) / 1000));
+    if (speed_bonus > 0 && number_correct === 4) {
+        score += speed_bonus;
+    }
     document.getElementById("current_score").innerHTML = score;
 }
 
 function game_feedback(i, index) {
     if (maps(document.getElementById("matching_box_" + String(i)).src,
              document.getElementById(i).childNodes[index].src)) {
-        score += 100;
+        score += quiz_values[String(quiz_index)];
         document.getElementById(i).style.border= "solid lime 5px";
+        number_correct += 1;
     } else {
         document.getElementById(i).style.border= "solid red 5px";
     }
@@ -205,6 +224,7 @@ function randint(n) {
 }
 
 function new_board() {
+    start_time = new Date();
     document.getElementById("submit").disabled = true;
     document.getElementById("new_board").disabled = true;
     var matching_picture_order = shuffle([0, 1, 2, 3]);
