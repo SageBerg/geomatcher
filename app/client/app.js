@@ -19,14 +19,18 @@ var quiz_index = 4;
 var quiz_button_ids = ["names_quiz", "flags_quiz", "incomes_quiz", 
                        "religions_quiz", "populations_quiz", "all_quiz"];
 
+var submit_disabled = true;
+var new_board_disabled = true;
+
 for (x in quiz_button_ids) {
     $("#" + quiz_button_ids[x]).css("cursor", "pointer");
 }
 
-function handleLoginResult(resp_body) {
-    console.log(resp_body);
-    score = resp_body.score;
+$("#submit").css("cursor", "pointer");
+$("#new_board").css("cursor", "pointer");
 
+function handleLoginResult(resp_body) {
+    score = resp_body.score;
     if (resp_body.name && resp_body.password) {
         document.getElementById("user_name").innerHTML = resp_body.name;
         document.getElementById("anon_user_message").innerHTML = "";
@@ -74,8 +78,10 @@ function handleRegisterResult(resp_body) {
 };
 
 function handleSubmitResult(resp_body) {
-    document.getElementById("new_board").disabled = false;
-    document.getElementById("submit").disabled = true;
+    new_board_disabled = false;
+    enable("new_board");
+    submit_disabled = true;
+    disable("submit");
     document.getElementById("current_score").innerHTML = resp_body.score;
     box_occupied = [true, true, true, true, true, true, true, true];
 };
@@ -107,17 +113,23 @@ var main = function (){
         }
     });
 
-    $("button#submit").on("click", function (event) {
-        end_time = new Date();
-        check_matches();
-        $.post("submit.json", 
-        {"name": document.getElementById("user_name").innerHTML, 
-        "score": parseInt(document.getElementById("current_score").innerHTML)},
-        handleSubmitResult);
+    $("#submit").on("click", function (event) {
+        if (!submit_disabled) {
+            end_time = new Date();
+            check_matches();
+            $.post("submit.json", 
+            {"name": 
+                document.getElementById("user_name").innerHTML, 
+            "score": 
+                parseInt(document.getElementById("current_score").innerHTML)},
+            handleSubmitResult);
+        }
     });
 
-    $("button#new_board").on("click", function (event) {
-        new_board();
+    $("#new_board").on("click", function (event) {
+        if (!new_board_disabled) {
+            new_board();
+        }
     });
 }
 
@@ -144,9 +156,11 @@ function drop(ev) {
     }
     if (box_occupied[0] && box_occupied[1] && 
         box_occupied[2] && box_occupied[3] && !box_occupied[4]) {
-        document.getElementById("submit").disabled = false;
+        submit_disabled = false;
+        enable("submit");
     } else {
-        document.getElementById("submit").disabled = true;
+        submit_disbaled = true;
+        disable("submit");
     }
 }
 
@@ -188,7 +202,6 @@ function build_image_path(src) {
 function maps(key, target) {
     target_path_end = build_image_path(target);
     key_path_end = build_image_path(key);
-    console.log("key, target: ", key_path_end, target_path_end);
     return $.inArray(target_path_end, countries[key_path_end]) > -1;
 }
 
@@ -225,8 +238,10 @@ function randint(n) {
 
 function new_board() {
     start_time = new Date();
-    document.getElementById("submit").disabled = true;
-    document.getElementById("new_board").disabled = true;
+    submit_disabled = true;
+    disable("sumbit");
+    new_board_disabled = true;
+    disable("new_board");
     var matching_picture_order = shuffle([0, 1, 2, 3]);
     var answer_picture_order = shuffle([0, 1, 2, 3]);
     var matching_pictures = [];
@@ -274,6 +289,14 @@ function change_quiz(quiz_type, quiz_button_id) {
         }
     }
     $("#" + quiz_button_id).css("background", "#627A59");
+}
+
+function enable(id) {
+    $("#" + id).css("color", "black");
+}
+
+function disable(id) {
+    $("#" + id).css("color", "#A0A0A0");
 }
 
 $(document).ready(main);

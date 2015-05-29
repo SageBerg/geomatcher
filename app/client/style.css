@@ -45,7 +45,7 @@ input {
 
 .game_board {
     width: 96%;
-    height: 484px;
+    height: 460px;
     border-style: solid;
     border-width: 5px;
     border-color: #ffffff;
@@ -97,16 +97,15 @@ input {
     margin: 10px;
 }
 
-#submit {
-    position: absolute;
-    top: 593px;
-    left: 50px;
-}
-
-#new_board {
-    position: absolute;
-    top: 593px;
-    left: 150px;
+.gameplay_tab {
+    background: #EAEAEA;
+    color: #A0A0A0;
+    border-radius: 10px;
+    display: inline-block;
+    text-align: center;
+    width: 100px;
+    padding: 10px;
+    border: 1px white solid;
 }
 
 .welcome {
