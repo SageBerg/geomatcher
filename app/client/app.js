@@ -197,7 +197,6 @@ function fetch_random(obj) {
             keys.push(temp_key);
         }
     }
-    //return obj[keys[Math.floor(Math.random() * keys.length)]];
     return keys[Math.floor(Math.random() * keys.length)];
 }
 
@@ -212,8 +211,14 @@ function new_board() {
     var answer_picture_order = shuffle([0, 1, 2, 3]);
     var matching_pictures = [];
     var answers = [];
+    var candidate_country = null;
     for (var i = 0; i < 4; i++) {
-        matching_pictures.push(fetch_random(countries));
+        candidate_country = (fetch_random(countries)); 
+        if ($.inArray(candidate_country, matching_pictures) > -1) {
+            i--;
+            continue;
+        };
+        matching_pictures.push(candidate_country);
         if (quiz_index === -1) {
             picture_roll = randint(countries[matching_pictures[i]].length);
         } else {
