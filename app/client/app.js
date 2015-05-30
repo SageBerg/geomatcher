@@ -38,7 +38,8 @@ function handleLoginResult(resp_body) {
         document.getElementById("anon_user_message").innerHTML = "";
         clear_login();
         document.getElementById("current_score").innerHTML = resp_body.score;
-        document.getElementById("login").innerHTML = '<button id="logout_button">sign out</button>';
+        document.getElementById("login").innerHTML = 
+            '<button id="logout_button">sign out</button>';
         $("button#logout_button").on("click", function (event) {
             handleLogoutResult();
         });
@@ -51,15 +52,19 @@ function handleLogoutResult(resp_body) {
     score = 0;
     document.getElementById("current_score").innerHTML = score;
     document.getElementById("user_name").innerHTML = "Anonymous User";
-    document.getElementById("anon_user_message").innerHTML = "Create a new account or sign into an "
+    document.getElementById("anon_user_message").innerHTML = 
+        "Create a new account or sign into an "
         + "existing account if you want to save your score.";
-    document.getElementById("login").innerHTML = '<input id="old_name" type="text" ' +
-        'placeholder="name">' + '<input id="old_pass" type="password" placeholder="password">'
+    document.getElementById("login").innerHTML = 
+        '<input id="old_name" type="text" ' +
+        'placeholder="name">' + 
+        '<input id="old_pass" type="password" placeholder="password">'
         + '<button id="login_button">sign in</button><p id="feedback"></p>';
     $("button#login_button").on("click", function (event){ 
         $.get("login.json",
             {"name": $("#old_name").val(), "password": $("#old_pass").val(), 
-            "score": parseInt(document.getElementById("current_score").innerHTML) },
+            "score": 
+                parseInt(document.getElementById("current_score").innerHTML) },
             handleLoginResult);
     });
 };
@@ -89,12 +94,14 @@ function handleSubmitResult(resp_body) {
 var main = function (){
     new_board();
     $("button#login_button").on("click", function (event){ 
-        if (document.getElementById("user_name").innerHTML !== "Anonymous User") {
+        if (document.getElementById("user_name").innerHTML !== 
+            "Anonymous User") {
             handleLogoutResult();
         }
         $.get("login.json",
             {"name": $("#old_name").val(), "password": $("#old_pass").val(), 
-            "score": parseInt(document.getElementById("current_score").innerHTML) },
+            "score": 
+                parseInt(document.getElementById("current_score").innerHTML) },
             handleLoginResult);
     });
 
@@ -103,12 +110,14 @@ var main = function (){
             handleLogoutResult();
         }
         if ($("#new_pass").val() !== $("#new_pass_2").val()) {
-            document.getElementById("register_feedback").innerHTML = "Re-enter the same password.";
+            document.getElementById("register_feedback").innerHTML = 
+                "Re-enter the same password.";
         } else {
             $.post("register.json", 
                 {"name": $("#new_name").val(), 
                 "password": $("#new_pass").val(), 
-                "score": parseInt(document.getElementById("current_score").innerHTML)}, 
+                "score": 
+                parseInt(document.getElementById("current_score").innerHTML)}, 
                 handleRegisterResult);
         }
     });
