@@ -566,7 +566,7 @@ var countries = {
                       "images/populations/2m.jpg",
                       "images/titles/qatar_title.jpg",],
                  "images/maps/romania.png":
-                     ["images/flags/romania.gif", 
+                     ["images/flags/chad.gif", //chad and romania have the same flag
                       "images/religions/christianity.jpg",
                       "images/income/20k.jpg",
                       "images/populations/20m.jpg",
