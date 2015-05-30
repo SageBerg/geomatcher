@@ -134,7 +134,7 @@ input {
     color: red; 
 }
 
-.new_user {
+.user {
     background: #346733;
     width: 190px;
     height: 190px;
@@ -146,6 +146,15 @@ input {
     margin: 10px;
     float:left;
     text-align: center;
+    color: white;
+}
+
+#feedback {
+    color: white;
+}
+
+#register_feedback {
+    color: white;
 }
 
 .drag {
@@ -154,10 +163,11 @@ input {
 
 .top_score {
     padding: 2px;
-    width: 75%;
+    width: 100%;
     background: #ffffff;
     border-radius: 10px;
     margin-top: 5px;
+    color: black;
 }
 
 footer {

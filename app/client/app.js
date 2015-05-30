@@ -48,7 +48,7 @@ function handleLoginResult(resp_body) {
         });
     } else {
         document.getElementById("feedback").innerHTML = 
-            "invalid user name or password";
+            "You entered an invalid user name or password.";
     }
 };
 
@@ -201,7 +201,6 @@ function inc_score(remaining) {
         return
     }
     score += 1;
-    console.log(score);
     document.getElementById("current_score").innerHTML = score;
     setTimeout(function() {inc_score(remaining - 1);}, 1);
 }
