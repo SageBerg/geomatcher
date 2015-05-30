@@ -1,6 +1,7 @@
 var score = 0;
 var new_points = 0;
 var number_correct = 0;
+var logged_in = false;
 
 //assigned timestamps when a new board is generated or submitted
 //measures how fast the learner completes the board 
@@ -35,6 +36,7 @@ function handleLoginResult(resp_body) {
     clear_register();
 
     if (resp_body.name && resp_body.password) {
+        logged_in = true;
         document.getElementById("user_name").innerHTML = resp_body.name;
         document.getElementById("anon_user_message").innerHTML = "";
         clear_login();
@@ -52,6 +54,7 @@ function handleLoginResult(resp_body) {
 
 function handleLogoutResult(resp_body) {
     score = 0;
+    logged_in = false;
     document.getElementById("current_score").innerHTML = score;
     document.getElementById("user_name").innerHTML = "Anonymous User";
     document.getElementById("anon_user_message").innerHTML = 
@@ -73,7 +76,7 @@ function handleLogoutResult(resp_body) {
 
 function handleRegisterResult(resp_body) {
     console.log( resp_body );
-    if( resp_body.url ) window.location = resp_body.url;
+    logged_in = true;
     document.getElementById("user_name").innerHTML = resp_body.name;
     document.getElementById("anon_user_message").innerHTML = '';
     clear_register();
@@ -97,8 +100,7 @@ function handleSubmitResult(resp_body) {
 var main = function (){
     new_board();
     $("button#login_button").on("click", function (event){ 
-        if (document.getElementById("user_name").innerHTML !== 
-            "Anonymous User") {
+        if (logged_in) {
             handleLogoutResult();
         }
         $.get("login.json",
@@ -109,7 +111,7 @@ var main = function (){
     });
 
     $("button#register").on("click", function (event){ 
-        if ($("#user_name") !== "Anonymous User") {
+        if (logged_in) {
             handleLogoutResult();
         }
         if ($("#new_pass").val() !== $("#new_pass_2").val()) {
