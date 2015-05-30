@@ -97,8 +97,8 @@ input {
     margin: 10px;
 }
 
-.gameplay_tab {
-    background: #EAEAEA;
+.gameplay_button {
+    background: #B9B9B9;
     color: #A0A0A0;
     border-radius: 10px;
     display: inline-block;
