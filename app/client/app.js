@@ -1,4 +1,5 @@
 var score = 0;
+var new_points = 0;
 var number_correct = 0;
 
 //assigned timestamps when a new board is generated or submitted
@@ -44,7 +45,8 @@ function handleLoginResult(resp_body) {
             handleLogoutResult();
         });
     } else {
-        document.getElementById("feedback").innerHTML = "invalid user name or password";
+        document.getElementById("feedback").innerHTML = 
+            "invalid user name or password";
     }
 };
 
@@ -76,7 +78,8 @@ function handleRegisterResult(resp_body) {
     document.getElementById("anon_user_message").innerHTML = '';
     clear_register();
     
-    document.getElementById("login").innerHTML = '<button id="logout_button">sign out</button>';
+    document.getElementById("login").innerHTML = 
+        '<button id="logout_button">sign out</button>';
     $("button#logout_button").on("click", function (event) {
         handleLogoutResult();
     });
@@ -160,7 +163,8 @@ function drop(ev) {
     if (isInt(ev.target.id) && !box_occupied[parseInt(ev.target.id)]) {
         box_occupied[parseInt(ev.target.id)] = true;
         var data = ev.dataTransfer.getData("text");
-        box_occupied[parseInt(document.getElementById(data).parentNode.id)] = false;
+        box_occupied[parseInt(document.getElementById(data).parentNode.id)] = 
+            false;
         ev.target.appendChild(document.getElementById(data));
     }
     if (box_occupied[0] && box_occupied[1] && 
@@ -174,6 +178,8 @@ function drop(ev) {
 }
 
 function check_matches() {
+    number_correct = 0;
+    new_points = 0;
     for (var i = 0; i < 4; i++) {
         if (document.getElementById(i).childNodes[0].src !== undefined) {
             game_feedback(i, 0);
@@ -182,16 +188,26 @@ function check_matches() {
         }
         speed_bonus = (60 - ((end_time - start_time) / 1000));
         if (speed_bonus > 0 && number_correct === 4) {
-            score += speed_bonus;
+            new_points += speed_bonus;
         }
     }
+    inc_score(new_points);
+}
+
+function inc_score(remaining) {
+    if (remaining <= 0) {
+        return
+    }
+    score += 1;
+    console.log(score);
     document.getElementById("current_score").innerHTML = score;
+    setTimeout(function() {inc_score(remaining - 1);}, 1);
 }
 
 function game_feedback(i, index) {
     if (maps(document.getElementById("matching_box_" + String(i)).src,
              document.getElementById(i).childNodes[index].src)) {
-        score += quiz_values[String(quiz_index)];
+        new_points += quiz_values[String(quiz_index)];
         document.getElementById(i).style.border= "solid lime 5px";
         number_correct += 1;
     } else {
