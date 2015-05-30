@@ -296,13 +296,27 @@ function new_board() {
           '" src=' + matching_pictures[matching_picture_order[i]] + 
           '><div class="drop_box" id="' + String(i) + 
           '" ondrop="drop(event)" ondragover="allowDrop(event)"></div>';
-        document.getElementById(i + 4).innerHTML = 
-          '<img class="drag" ' +
-          'id="drag' + String(i + 4) + 
-          '" src = ' + answers[answer_picture_order[i]] +
-          ' draggable="true"' +
-          ' ondragstart="drag(event)"' +
-          ' width="192px" height="108px">';
+        if (quiz_index !== 1) {
+            document.getElementById(i + 4).innerHTML = 
+              '<img class="drag" ' +
+              'id="drag' + String(i + 4) + 
+              '" src = ' + answers[answer_picture_order[i]] +
+              ' draggable="true"' +
+              ' ondragstart="drag(event)"' +
+              ' width="192px" height="108px">';
+        } else {
+            //religions need a title attribute because the religion images
+            //don't come with the name of the religion on them, just the symbol
+            document.getElementById(i + 4).innerHTML = 
+              '<img class="drag" ' +
+              'id="drag' + String(i + 4) + 
+              '" src=' + answers[answer_picture_order[i]] +
+              ' title=' + 
+              answers[answer_picture_order[i]].split("/")[2].split(".")[0] +
+              ' draggable="true"' +
+              ' ondragstart="drag(event)"' +
+              ' width="192px" height="108px">';
+        }
     }
     box_occupied = [false, false, false, false, true, true, true, true];
 }
