@@ -110,8 +110,15 @@ var main = function (){
         if ($("#new_pass").val() !== $("#new_pass_2").val()) {
             document.getElementById("register_feedback").innerHTML = 
                 "Re-enter the same password.";
+        } else if (document.getElementById("new_name").value === '') {
+           document.getElementById("register_feedback").innerHTML = 
+           "You did not enter a user name.";
+        } else if (document.getElementById("new_pass").value === '') {
+           document.getElementById("register_feedback").innerHTML = 
+           "You did not enter a password.";
         } else if (document.getElementById("new_name").value !== '' && 
                    document.getElementById("new_pass").value !== '') {
+                   //$.get("validate_name")) {
             if (logged_in) {
                 handleLogoutResult();
             }
@@ -121,9 +128,7 @@ var main = function (){
                  "score": 
                 parseInt(document.getElementById("current_score").innerHTML)}, 
                 handleRegisterResult);
-        } else {
-           document.getElementById("register_feedback").innerHTML = "You did not enter a user name and/or a password.";
-        }
+        } 
     });
 
     $("#submit").on("click", function (event) {
