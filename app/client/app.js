@@ -74,15 +74,14 @@ function handleLogoutResult(resp_body) {
 };
 
 function handleRegisterResult(resp_body) {
-    console.log("handleRegisterResult: resp_body.name: " + resp_body.name);
-        logged_in = true;
-        document.getElementById("user_name").innerHTML = resp_body.name;
-        document.getElementById("anon_user_message").innerHTML = '';
-        document.getElementById("login").innerHTML = 
-            '<button id="logout_button">sign out</button>';
-        $("button#logout_button").on("click", function (event) {
-            handleLogoutResult();
-        });
+    logged_in = true;
+    document.getElementById("user_name").innerHTML = resp_body.name;
+    document.getElementById("anon_user_message").innerHTML = '';
+    document.getElementById("login").innerHTML = 
+        '<button id="logout_button">sign out</button>';
+    $("button#logout_button").on("click", function (event) {
+        handleLogoutResult();
+    });
     clear_register();
 };
 
