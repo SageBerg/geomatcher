@@ -45,8 +45,6 @@ app.post("/register.json", registerHandler);
 
 app.post("/submit.json", submitHandler);
 
-//route handlers - should refactor into separate files
-
 function submitHandler(req, res) {
     var the_body = req.body;
     var score = the_body.score;

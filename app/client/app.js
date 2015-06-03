@@ -88,15 +88,6 @@ function handleRegisterResult(resp_body) {
     });
 };
 
-function handleSubmitResult(resp_body) {
-    new_board_disabled = false;
-    enable("new_board");
-    submit_disabled = true;
-    disable("submit");
-    document.getElementById("current_score").innerHTML = resp_body.score;
-    box_occupied = [true, true, true, true, true, true, true, true];
-};
-
 var main = function (){
     new_board();
     $("button#login_button").on("click", function (event){ 
@@ -129,14 +120,7 @@ var main = function (){
 
     $("#submit").on("click", function (event) {
         if (!submit_disabled) {
-            end_time = new Date();
             check_matches();
-            $.post("submit.json", 
-            {"name": 
-                document.getElementById("user_name").innerHTML, 
-            "score": 
-                parseInt(document.getElementById("current_score").innerHTML)},
-            handleSubmitResult);
         }
     });
 
@@ -180,6 +164,12 @@ function drop(ev) {
 }
 
 function check_matches() {
+    end_time = new Date();
+    new_board_disabled = false;
+    enable("new_board");
+    submit_disabled = true;
+    disable("submit");
+    box_occupied = [true, true, true, true, true, true, true, true];
     number_correct = 0;
     new_points = 0;
     for (var i = 0; i < 4; i++) {
@@ -190,9 +180,11 @@ function check_matches() {
         }
         speed_bonus = (60 - ((end_time - start_time) / 1000));
         if (speed_bonus > 0 && number_correct === 4) {
-            new_points += speed_bonus;
+            new_points += Math.floor(speed_bonus);
         }
     }
+    var name = document.getElementById("user_name").innerHTML;
+    $.post("submit.json", {"name": name, "score": new_points + score}, null);
     inc_score(new_points);
 }
 
