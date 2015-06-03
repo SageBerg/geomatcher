@@ -1,13 +1,12 @@
 var express = require("express"),
     http = require("http"),
     mongoose = require('mongoose'),
-    //port = process.env.PORT || 3000,  //for cloud later //was causing error
     port = 3000,
     app;
 
 app = express();
 var server = http.createServer(app);
-server.listen(port); //3000 for now
+server.listen(port);
 
 mongoose.connect('mongodb://localhost/geomatcher');
 
@@ -24,25 +23,15 @@ mongoose.connection.on('disconnected', function () {
 });
 
 app.use(express.urlencoded());  //this allows req.body
-
-// set up a static file directory to use for default routing
 app.use(express.static(__dirname + "/client"));
 
-//schemas (see http://mongoosejs.com/docs/3.6.x/docs/schematypes.html)
 var UserSchema = mongoose.Schema({ user: String,
                                    password: String,
                                    score: Number});
-                                   // history: [String],
-                                   // compromised: [String]});
-
 var User = mongoose.model("User", UserSchema);
 
-//routes for login page
-
 app.get("/login.json", loginHandler);
-
 app.post("/register.json", registerHandler);
-
 app.post("/submit.json", submitHandler);
 
 function submitHandler(req, res) {
@@ -51,7 +40,8 @@ function submitHandler(req, res) {
     console.log("SCORE: " + the_body.score);
     console.log("SUBMIT NAME: " + the_body.name);
     if (the_body.name !== "Anonymous User") {
-        User.update({"user": the_body.name}, {"score": the_body.score}, function(err) {
+        User.update({"user": the_body.name}, 
+                    {"score": the_body.score}, function(err) {
             if (err) {
                 console.log("database update error.");
             }
@@ -71,21 +61,17 @@ function submitHandler(req, res) {
 }
 
 function loginHandler(req, res) {
-    var the_body = req.query; //req.body goes with post
-    console.log("login request", the_body);
+    var the_body = req.query;
+    console.log("login request by ", the_body.name);
     middleLogin(the_body, function(answer) {
         console.log("answer: ", answer); 
-        //needs to return answer.name, answer.password
         //name and answer are boolean values
         if (!answer.name || !answer.password) {
             res.json(answer); 
         } else {
-            //console.log("the_body.score: " + the_body.score);
-            //console.log("answer.score: " + answer.score);
             var score = parseInt(the_body.score) + parseInt(answer.score);
-            //console.log("answer.name: " + answer.name);
-            //console.log("score: " + score);
-            User.update({"user": answer.name}, {$set: {"score": score}}, function(err) {
+            User.update({"user": answer.name}, 
+                        {$set: {"score": score}}, function(err) {
                 if (err) {
                     console.log("database update error.");
                 }
@@ -100,10 +86,7 @@ function registerHandler(req, res) {
     var the_body = req.body;
     console.log("register request", the_body);
     middleLogin(the_body, function(answer) {
-        if (the_body.name === '' || the_body.password === '') {
-            console.log('Enter a username and password.');
-            res.json(answer);
-        } else if (!answer.name) {
+        if (!answer.name) {
             new_user = new User({"user": the_body.name, 
                                  "password": the_body.password, 
                                  "score": the_body.score});
@@ -144,7 +127,9 @@ function mongoCheckExistence(login, callback) {
         } 
         if (result) {
             if (result.password === password) {
-                callback({"name": name, "password": true, "score": result.score});
+                callback({"name": name, 
+                          "password": true, 
+                          "score": result.score});
             } else {
                 callback({"name": true, "password": false});
             }

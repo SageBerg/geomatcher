@@ -27,7 +27,6 @@ var new_board_disabled = true;
 for (x in quiz_button_ids) {
     $("#" + quiz_button_ids[x]).css("cursor", "pointer");
 }
-
 $("#submit").css("cursor", "pointer");
 $("#new_board").css("cursor", "pointer");
 
@@ -75,21 +74,27 @@ function handleLogoutResult(resp_body) {
 };
 
 function handleRegisterResult(resp_body) {
-    console.log( resp_body );
-    logged_in = true;
-    document.getElementById("user_name").innerHTML = resp_body.name;
-    document.getElementById("anon_user_message").innerHTML = '';
+    console.log("handleRegisterResult: resp_body.name: " + resp_body.name);
+    if (true) {
+        logged_in = true;
+        document.getElementById("user_name").innerHTML = resp_body.name;
+        document.getElementById("anon_user_message").innerHTML = '';
+        document.getElementById("login").innerHTML = 
+            '<button id="logout_button">sign out</button>';
+        $("button#logout_button").on("click", function (event) {
+            handleLogoutResult();
+        });
+    } else {
+        document.getElementById("register_feedback").innerHTML = 
+            "This user name is already taken.";
+    }
     clear_register();
-    
-    document.getElementById("login").innerHTML = 
-        '<button id="logout_button">sign out</button>';
-    $("button#logout_button").on("click", function (event) {
-        handleLogoutResult();
-    });
+    console.log("NEW USER INFO: ", resp_body);
 };
 
 var main = function (){
     new_board();
+
     $("button#login_button").on("click", function (event){ 
         if (logged_in) {
             handleLogoutResult();
@@ -102,19 +107,22 @@ var main = function (){
     });
 
     $("button#register").on("click", function (event){ 
-        if (logged_in) {
-            handleLogoutResult();
-        }
         if ($("#new_pass").val() !== $("#new_pass_2").val()) {
             document.getElementById("register_feedback").innerHTML = 
                 "Re-enter the same password.";
-        } else {
-            $.post("register.json", 
+        } else if (document.getElementById("new_name").value !== '' && 
+                   document.getElementById("new_pass").value !== '') {
+            if (logged_in) {
+                handleLogoutResult();
+            }
+            $.post("register.json",
                 {"name": $("#new_name").val(), 
-                "password": $("#new_pass").val(), 
-                "score": 
+                 "password": $("#new_pass").val(), 
+                 "score": 
                 parseInt(document.getElementById("current_score").innerHTML)}, 
                 handleRegisterResult);
+        } else {
+           document.getElementById("register_feedback").innerHTML = "You did not enter a user name and/or a password.";
         }
     });
 
