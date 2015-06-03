@@ -75,7 +75,6 @@ function handleLogoutResult(resp_body) {
 
 function handleRegisterResult(resp_body) {
     console.log("handleRegisterResult: resp_body.name: " + resp_body.name);
-    if (true) {
         logged_in = true;
         document.getElementById("user_name").innerHTML = resp_body.name;
         document.getElementById("anon_user_message").innerHTML = '';
@@ -84,12 +83,7 @@ function handleRegisterResult(resp_body) {
         $("button#logout_button").on("click", function (event) {
             handleLogoutResult();
         });
-    } else {
-        document.getElementById("register_feedback").innerHTML = 
-            "This user name is already taken.";
-    }
     clear_register();
-    console.log("NEW USER INFO: ", resp_body);
 };
 
 var main = function (){
@@ -118,7 +112,6 @@ var main = function (){
            "You did not enter a password.";
         } else if (document.getElementById("new_name").value !== '' && 
                    document.getElementById("new_pass").value !== '') {
-                   //$.get("validate_name")) {
             if (logged_in) {
                 handleLogoutResult();
             }
@@ -128,7 +121,7 @@ var main = function (){
                  "score": 
                 parseInt(document.getElementById("current_score").innerHTML)}, 
                 handleRegisterResult);
-        } 
+        }
     });
 
     $("#submit").on("click", function (event) {

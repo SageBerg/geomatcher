@@ -100,7 +100,7 @@ function registerHandler(req, res) {
             });
         } else {
             console.log("user with this name is already in the database");
-            res.json(answer);
+            res.json();
         }
     });
 }
