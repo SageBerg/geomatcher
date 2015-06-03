@@ -74,14 +74,18 @@ function handleLogoutResult(resp_body) {
 };
 
 function handleRegisterResult(resp_body) {
-    logged_in = true;
-    document.getElementById("user_name").innerHTML = resp_body.name;
-    document.getElementById("anon_user_message").innerHTML = '';
-    document.getElementById("login").innerHTML = 
-        '<button id="logout_button">sign out</button>';
-    $("button#logout_button").on("click", function (event) {
-        handleLogoutResult();
-    });
+    if (resp_body.valid) {
+        logged_in = true;
+        document.getElementById("user_name").innerHTML = resp_body.body.name;
+        document.getElementById("anon_user_message").innerHTML = '';
+        document.getElementById("login").innerHTML = 
+            '<button id="logout_button">sign out</button>';
+        $("button#logout_button").on("click", function (event) {
+            handleLogoutResult();
+        });
+    } else {
+        document.getElementById("register_feedback").innerHTML = "A user with this name already exists.";
+    }
     clear_register();
 };
 

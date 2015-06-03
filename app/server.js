@@ -95,12 +95,12 @@ function registerHandler(req, res) {
                     console.log("save error: ", err);
                 } else {
                     console.log("entered new user in database");
-                    res.json(the_body);
+                    res.json({"body": the_body, "valid": true});
                 }
             });
         } else {
             console.log("user with this name is already in the database");
-            res.json();
+            res.json({"body": null, "valid": false});
         }
     });
 }
