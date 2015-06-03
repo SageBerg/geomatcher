@@ -74,7 +74,11 @@ function handleLogoutResult(resp_body) {
 };
 
 function handleRegisterResult(resp_body) {
-    if (resp_body.valid) {
+    if (resp_body.valid === true) {
+        clear_register();
+        if (logged_in) {
+            handleLogoutResult();
+        }
         logged_in = true;
         document.getElementById("user_name").innerHTML = resp_body.body.name;
         document.getElementById("anon_user_message").innerHTML = '';
@@ -86,7 +90,6 @@ function handleRegisterResult(resp_body) {
     } else {
         document.getElementById("register_feedback").innerHTML = "A user with this name already exists.";
     }
-    clear_register();
 };
 
 var main = function (){
@@ -115,9 +118,6 @@ var main = function (){
            "You did not enter a password.";
         } else if (document.getElementById("new_name").value !== '' && 
                    document.getElementById("new_pass").value !== '') {
-            if (logged_in) {
-                handleLogoutResult();
-            }
             $.post("register.json",
                 {"name": $("#new_name").val(), 
                  "password": $("#new_pass").val(), 
