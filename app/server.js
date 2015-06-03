@@ -63,7 +63,7 @@ function submitHandler(req, res) {
 function loginHandler(req, res) {
     var the_body = req.query;
     console.log("login request by ", the_body.name);
-    middleLogin(the_body, function(answer) {
+    mongoCheckExistence(the_body, function(answer) {
         console.log("answer: ", answer); 
         //name and answer are boolean values
         if (!answer.name || !answer.password) {
@@ -85,7 +85,7 @@ function loginHandler(req, res) {
 function registerHandler(req, res) {
     var the_body = req.body;
     console.log("register request", the_body);
-    middleLogin(the_body, function(answer) {
+    mongoCheckExistence(the_body, function(answer) {
         if (!answer.name) {
             new_user = new User({"user": the_body.name, 
                                  "password": the_body.password, 
@@ -101,16 +101,6 @@ function registerHandler(req, res) {
         } else {
             console.log("user with this name is already in the database");
             res.json(answer);
-        }
-    });
-}
-
-function middleLogin(login, callback) { 
-    mongoCheckExistence(login, function(result) {
-        if (result.err) {
-            callback({"err": result.err});
-        } else {
-            callback(result);
         }
     });
 }
