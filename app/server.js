@@ -36,8 +36,14 @@ app.post("/submit.json", submitHandler);
 app.get("/update_leaderboard.json", updateLeaderboardHandler);
 
 function updateLeaderboardHandler(req, res) {
-    console.log("update leaderboard server-side.");
-    res.json({});
+    User.find().sort({score: -1}).exec(function(err, players) {
+        if (err) {
+            console.log("update leader-board database error.");
+            res.json([]);
+        } else {
+            res.json(players);
+        }
+    });
 }
 
 function submitHandler(req, res) {

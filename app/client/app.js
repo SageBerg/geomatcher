@@ -93,7 +93,10 @@ function handleRegisterResult(resp_body) {
 };
 
 function updateLeaderboardResult(resp_body) {
-    console.log("update leaderboard client-side.");
+    places = ["first", "second", "third", "fourth", "fifth", "sixth"];
+    for (var i = 0; i < 6; i++) {
+        document.getElementById(places[i]).innerHTML = resp_body[i].user + ' ' + resp_body[i].score;
+    }
 }
 
 var main = function (){
