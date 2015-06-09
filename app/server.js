@@ -37,8 +37,6 @@ app.post("/submit.json", submitHandler);
 function submitHandler(req, res) {
     var the_body = req.body;
     var score = the_body.score;
-    console.log("SCORE: " + the_body.score);
-    console.log("SUBMIT NAME: " + the_body.name);
     if (the_body.name !== "Anonymous User") {
         User.update({"user": the_body.name}, 
                     {"score": the_body.score}, function(err) {
@@ -47,7 +45,6 @@ function submitHandler(req, res) {
             }
         });
         User.findOne({"user": the_body.name}, function(err, result) {
-            console.log("existence result ", result); 
             if (err) {
                 console.log("existence error"); 
                 callback({"err": err});
@@ -62,9 +59,7 @@ function submitHandler(req, res) {
 
 function loginHandler(req, res) {
     var the_body = req.query;
-    console.log("login request by ", the_body.name);
     mongoCheckExistence(the_body, function(answer) {
-        console.log("answer: ", answer); 
         //name and answer are boolean values
         if (!answer.name || !answer.password) {
             res.json(answer); 
@@ -84,7 +79,6 @@ function loginHandler(req, res) {
 
 function registerHandler(req, res) {
     var the_body = req.body;
-    console.log("register request", the_body);
     mongoCheckExistence(the_body, function(answer) {
         if (!answer.name) {
             new_user = new User({"user": the_body.name, 
@@ -94,12 +88,10 @@ function registerHandler(req, res) {
                 if (err != null) {
                     console.log("save error: ", err);
                 } else {
-                    console.log("entered new user in database");
                     res.json({"body": the_body, "valid": true});
                 }
             });
         } else {
-            console.log("user with this name is already in the database");
             res.json({"body": null, "valid": false});
         }
     });
@@ -109,7 +101,6 @@ function mongoCheckExistence(login, callback) {
     var name = login.name;
     var password = login.password;
     User.findOne({"user": name}, function(err, result) {
-        console.log("existence result ", result); 
         if (err) {
            console.log("existence error"); 
            callback({"err": err});
