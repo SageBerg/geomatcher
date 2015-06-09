@@ -101,6 +101,7 @@ function updateLeaderboardResult(resp_body) {
 
 var main = function (){
     new_board();
+    $.get("update_leaderboard.json", {}, updateLeaderboardResult);
 
     $("button#login_button").on("click", function (event){ 
         if (logged_in) {
