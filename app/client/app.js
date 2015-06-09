@@ -92,6 +92,10 @@ function handleRegisterResult(resp_body) {
     }
 };
 
+function updateLeaderboardResult(resp_body) {
+    console.log("update leaderboard client-side.");
+}
+
 var main = function (){
     new_board();
 
@@ -130,6 +134,7 @@ var main = function (){
     $("#submit").on("click", function (event) {
         if (!submit_disabled) {
             check_matches();
+            $.get("update_leaderboard.json", {}, updateLeaderboardResult);
         }
     });
 

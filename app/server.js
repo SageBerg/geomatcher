@@ -33,6 +33,12 @@ var User = mongoose.model("User", UserSchema);
 app.get("/login.json", loginHandler);
 app.post("/register.json", registerHandler);
 app.post("/submit.json", submitHandler);
+app.get("/update_leaderboard.json", updateLeaderboardHandler);
+
+function updateLeaderboardHandler(req, res) {
+    console.log("update leaderboard server-side.");
+    res.json({});
+}
 
 function submitHandler(req, res) {
     var the_body = req.body;
