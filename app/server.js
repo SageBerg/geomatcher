@@ -1,7 +1,7 @@
 var express = require("express"),
     http = require("http"),
     //mongoose = require('mongoose'),
-    port = 3002,
+    port = 80,
     app;
 
 app = express();
