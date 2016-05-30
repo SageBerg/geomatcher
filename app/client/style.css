@@ -40,7 +40,7 @@ input {
 }
 
 .tab:hover {
-    background: #94AC81!important; 
+    background: #94AC81!important;
 }
 
 .game_board {
@@ -126,12 +126,12 @@ input {
 }
 
 #anon_user_message {
-    display: inline; 
+    display: inline;
 }
 
 #current_score {
     display: inline;
-    color: red; 
+    color: red;
 }
 
 .user {
@@ -193,6 +193,9 @@ footer {
     padding: 5px;
     font-size: 75%;
     font-family: "Times New Roman";
+    position:fixed;
+    bottom:0;
+    width: 100%;
 }
 
 .author_link {
