@@ -4,18 +4,18 @@ var number_correct = 0;
 var logged_in = false;
 
 //assigned timestamps when a new board is generated or submitted
-//measures how fast the learner completes the board 
+//measures how fast the learner completes the board
 //used to award bonus points for faster responses
 var start_time = null;
 var end_time = null;
 
 var box_occupied = [false, false, false, false, true, true, true, true];
-var quizzes = {"all": -1, "flags": 0, "religions": 1, "incomes": 2, 
+var quizzes = {"all": -1, "flags": 0, "religions": 1, "incomes": 2,
                "populations": 3, "names": 4};
 
 //quiz values = log base 10 of the number of answer tiles in quiz * 100
 //for example: there are 7 tiles in the religions set, so log(7) * 100 = 84
-var quiz_values = {"-1": 251, "0": 211, "1": 84, "2": 143, "3": 153, "4": 211}; 
+var quiz_values = {"-1": 251, "0": 211, "1": 84, "2": 143, "3": 153, "4": 211};
 
 quiz_index = 4;
 quiz_button_ids = ["names_quiz", "flags_quiz", "incomes_quiz", "religions_quiz",
@@ -30,6 +30,7 @@ for (x in quiz_button_ids) {
 $("#submit").css("cursor", "pointer");
 $("#new_board").css("cursor", "pointer");
 
+/*
 function handleLoginResult(resp_body) {
     score = resp_body.score;
     clear_register();
@@ -40,13 +41,13 @@ function handleLoginResult(resp_body) {
         document.getElementById("anon_user_message").innerHTML = "";
         clear_login();
         document.getElementById("current_score").innerHTML = resp_body.score;
-        document.getElementById("login").innerHTML = 
+        document.getElementById("login").innerHTML =
             '<button id="logout_button">sign out</button>';
         $("button#logout_button").on("click", function (event) {
             handleLogoutResult();
         });
     } else {
-        document.getElementById("feedback").innerHTML = 
+        document.getElementById("feedback").innerHTML =
             "You entered an invalid user name or password.";
     }
 };
@@ -56,18 +57,18 @@ function handleLogoutResult(resp_body) {
     logged_in = false;
     document.getElementById("current_score").innerHTML = score;
     document.getElementById("user_name").innerHTML = "Anonymous User";
-    document.getElementById("anon_user_message").innerHTML = 
+    document.getElementById("anon_user_message").innerHTML =
         "Create a new account or sign into an "
         + "existing account if you want to save your score.";
-    document.getElementById("login").innerHTML = 
+    document.getElementById("login").innerHTML =
         '<input id="old_name" type="text" ' +
-        'placeholder="name">' + 
+        'placeholder="name">' +
         '<input id="old_pass" type="password" placeholder="password">'
         + '<button id="login_button">sign in</button><p id="feedback"></p>';
-    $("button#login_button").on("click", function (event){ 
+    $("button#login_button").on("click", function (event){
         $.get("login.json",
-            {"name": $("#old_name").val(), "password": $("#old_pass").val(), 
-            "score": 
+            {"name": $("#old_name").val(), "password": $("#old_pass").val(),
+            "score":
                 parseInt(document.getElementById("current_score").innerHTML) },
             handleLoginResult);
     });
@@ -82,7 +83,7 @@ function handleRegisterResult(resp_body) {
         logged_in = true;
         document.getElementById("user_name").innerHTML = resp_body.body.name;
         document.getElementById("anon_user_message").innerHTML = '';
-        document.getElementById("login").innerHTML = 
+        document.getElementById("login").innerHTML =
             '<button id="logout_button">sign out</button>';
         $("button#logout_button").on("click", function (event) {
             handleLogoutResult();
@@ -92,53 +93,56 @@ function handleRegisterResult(resp_body) {
     }
 };
 
+
 function updateLeaderboardResult(resp_body) {
     places = ["first", "second", "third", "fourth", "fifth", "sixth"];
     for (var i = 0; i < 6; i++) {
         document.getElementById(places[i]).innerHTML = resp_body[i].user + ' ' + resp_body[i].score;
     }
 }
+*/
 
 var main = function (){
     new_board();
+    /*
     $.get("update_leaderboard.json", {}, updateLeaderboardResult);
 
-    $("button#login_button").on("click", function (event){ 
+    $("button#login_button").on("click", function (event){
         if (logged_in) {
             handleLogoutResult();
         }
         $.get("login.json",
-            {"name": $("#old_name").val(), "password": $("#old_pass").val(), 
-            "score": 
+            {"name": $("#old_name").val(), "password": $("#old_pass").val(),
+            "score":
                 parseInt(document.getElementById("current_score").innerHTML) },
             handleLoginResult);
     });
 
-    $("button#register").on("click", function (event){ 
+    $("button#register").on("click", function (event){
         if ($("#new_pass").val() !== $("#new_pass_2").val()) {
-            document.getElementById("register_feedback").innerHTML = 
+            document.getElementById("register_feedback").innerHTML =
                 "Re-enter the same password.";
         } else if (document.getElementById("new_name").value === '') {
-           document.getElementById("register_feedback").innerHTML = 
+           document.getElementById("register_feedback").innerHTML =
            "You did not enter a user name.";
         } else if (document.getElementById("new_pass").value === '') {
-           document.getElementById("register_feedback").innerHTML = 
+           document.getElementById("register_feedback").innerHTML =
            "You did not enter a password.";
-        } else if (document.getElementById("new_name").value !== '' && 
+        } else if (document.getElementById("new_name").value !== '' &&
                    document.getElementById("new_pass").value !== '') {
             $.post("register.json",
-                {"name": $("#new_name").val(), 
-                 "password": $("#new_pass").val(), 
-                 "score": 
-                parseInt(document.getElementById("current_score").innerHTML)}, 
+                {"name": $("#new_name").val(),
+                 "password": $("#new_pass").val(),
+                 "score":
+                parseInt(document.getElementById("current_score").innerHTML)},
                 handleRegisterResult);
         }
     });
-
+    */
     $("#submit").on("click", function (event) {
         if (!submit_disabled) {
             check_matches();
-            $.get("update_leaderboard.json", {}, updateLeaderboardResult);
+            //$.get("update_leaderboard.json", {}, updateLeaderboardResult);
         }
     });
 
@@ -167,11 +171,11 @@ function drop(ev) {
     if (isInt(ev.target.id) && !box_occupied[parseInt(ev.target.id)]) {
         box_occupied[parseInt(ev.target.id)] = true;
         var data = ev.dataTransfer.getData("text");
-        box_occupied[parseInt(document.getElementById(data).parentNode.id)] = 
+        box_occupied[parseInt(document.getElementById(data).parentNode.id)] =
             false;
         ev.target.appendChild(document.getElementById(data));
     }
-    if (box_occupied[0] && box_occupied[1] && 
+    if (box_occupied[0] && box_occupied[1] &&
         box_occupied[2] && box_occupied[3] && !box_occupied[4]) {
         submit_disabled = false;
         enable("submit");
@@ -201,8 +205,8 @@ function check_matches() {
             new_points += Math.floor(speed_bonus);
         }
     }
-    var name = document.getElementById("user_name").innerHTML;
-    $.post("submit.json", {"name": name, "score": new_points + score}, null);
+    //var name = document.getElementById("user_name").innerHTML;
+    //$.post("submit.json", {"name": name, "score": new_points + score}, null);
     inc_score(new_points);
 }
 
@@ -231,7 +235,7 @@ function build_image_path(src) {
     path_end += src.split("/")[src.split("/").length - 3] + "/";
     path_end += src.split("/")[src.split("/").length - 2] + "/";
     path_end += src.split("/")[src.split("/").length - 1];
-    return path_end; 
+    return path_end;
 }
 
 function maps(key, target) {
@@ -284,7 +288,7 @@ function new_board() {
     var answers = [];
     var candidate_country = null;
     for (var i = 0; i < 4; i++) {
-        candidate_country = (fetch_random(countries)); 
+        candidate_country = (fetch_random(countries));
         if ($.inArray(candidate_country, matching_pictures) > -1) {
             i--;
             continue;
@@ -302,13 +306,13 @@ function new_board() {
     for (var i = 0; i < 4; i++) {
         document.getElementById("matching_frame_" + String(i)).innerHTML =
           '<img class="matching_box" id="matching_box_' + String(i) +
-          '" src=' + matching_pictures[matching_picture_order[i]] + 
-          '><div class="drop_box" id="' + String(i) + 
+          '" src=' + matching_pictures[matching_picture_order[i]] +
+          '><div class="drop_box" id="' + String(i) +
           '" ondrop="drop(event)" ondragover="allowDrop(event)"></div>';
         if (quiz_index !== 1) {
-            document.getElementById(i + 4).innerHTML = 
+            document.getElementById(i + 4).innerHTML =
               '<img class="drag" ' +
-              'id="drag' + String(i + 4) + 
+              'id="drag' + String(i + 4) +
               '" src = ' + answers[answer_picture_order[i]] +
               ' draggable="true"' +
               ' ondragstart="drag(event)"' +
@@ -316,11 +320,11 @@ function new_board() {
         } else {
             //religions need a title attribute because the religion images
             //don't come with the name of the religion on them, just the symbol
-            document.getElementById(i + 4).innerHTML = 
+            document.getElementById(i + 4).innerHTML =
               '<img class="drag" ' +
-              'id="drag' + String(i + 4) + 
+              'id="drag' + String(i + 4) +
               '" src=' + answers[answer_picture_order[i]] +
-              ' title=' + 
+              ' title=' +
               answers[answer_picture_order[i]].split("/")[2].split(".")[0] +
               ' draggable="true"' +
               ' ondragstart="drag(event)"' +
